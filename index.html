@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arnaud Boos — Full Stack Engineer & Data Manager</title>
+    <style>
+        :root {
+            --bg: #0d1117;
+            --surface: #161b22;
+            --border: #30363d;
+            --text: #e6edf3;
+            --text-muted: #8b949e;
+            --accent: #58a6ff;
+            --accent-subtle: #1f6feb22;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Noto Sans, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.6;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 3rem 1.5rem;
+        }
+
+        header {
+            margin-bottom: 3rem;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        header .headline {
+            font-size: 1.25rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+        }
+
+        .links {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: color 0.2s;
+        }
+
+        .links a:hover {
+            color: var(--accent);
+        }
+
+        .links svg {
+            width: 16px;
+            height: 16px;
+            fill: currentColor;
+        }
+
+        section {
+            margin-bottom: 2.5rem;
+        }
+
+        section h2 {
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.25rem;
+        }
+
+        .experience-item {
+            margin-bottom: 1.75rem;
+        }
+
+        .experience-item .role {
+            font-size: 1.1rem;
+            font-weight: 600;
+        }
+
+        .experience-item .company {
+            color: var(--accent);
+            font-weight: 500;
+        }
+
+        .experience-item .meta {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .experience-item .details {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .experience-item .details li {
+            margin-bottom: 0.2rem;
+            list-style: none;
+        }
+
+        .experience-item .details li::before {
+            content: "·";
+            margin-right: 0.5rem;
+            color: var(--accent);
+        }
+
+        .skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .skills span {
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            color: var(--accent);
+            padding: 0.3rem 0.75rem;
+            border-radius: 2rem;
+            font-size: 0.85rem;
+            white-space: nowrap;
+        }
+
+        .education-item {
+            margin-bottom: 1rem;
+        }
+
+        .education-item .degree {
+            font-weight: 600;
+        }
+
+        .education-item .school {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+        }
+
+        .projects {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .project-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 0.5rem;
+            padding: 1rem 1.25rem;
+        }
+
+        .project-card h3 {
+            font-size: 1rem;
+            margin-bottom: 0.25rem;
+        }
+
+        .project-card p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        .project-card .tech {
+            margin-top: 0.5rem;
+            font-size: 0.8rem;
+            color: var(--accent);
+        }
+
+        footer {
+            margin-top: 3rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-muted);
+            font-size: 0.8rem;
+            text-align: center;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 2rem 1rem;
+            }
+            header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Arnaud Boos</h1>
+            <div class="headline">Full Stack Engineer & Data Manager</div>
+            <div class="links">
+                <a href="mailto:boosarnaud@gmail.com">
+                    <svg viewBox="0 0 16 16"><path d="M1.75 2h12.5c.966 0 1.75.784 1.75 1.75v8.5A1.75 1.75 0 0114.25 14H1.75A1.75 1.75 0 010 12.25v-8.5C0 2.784.784 2 1.75 2zM1.5 12.25c0 .138.112.25.25.25h12.5a.25.25 0 00.25-.25V5.809L8.38 9.397a.75.75 0 01-.76 0L1.5 5.809v6.441zm13-8.181v-.319a.25.25 0 00-.25-.25H1.75a.25.25 0 00-.25.25v.319l6.5 3.612 6.5-3.612z"/></svg>
+                    boosarnaud@gmail.com
+                </a>
+                <a href="https://www.linkedin.com/in/arnaud-boos-28a3a67b/" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><path d="M12.225 12.225h-1.778V9.44c0-.664-.012-1.519-.925-1.519-.926 0-1.068.724-1.068 1.47v2.834H6.676V6.498h1.707v.783h.024c.348-.594.996-.95 1.684-.925 1.802 0 2.135 1.185 2.135 2.728l-.001 3.14zM4.67 5.715a1.037 1.037 0 01-1.032-1.031c0-.566.466-1.032 1.032-1.032.566 0 1.031.466 1.032 1.032 0 .566-.466 1.032-1.032 1.032zm.889 6.51h-1.78V6.498h1.78v5.727zM13.11 2H2.885A.88.88 0 002 2.866v10.268a.88.88 0 00.885.866h10.226a.882.882 0 00.889-.866V2.865a.88.88 0 00-.889-.864z"/></svg>
+                    LinkedIn
+                </a>
+                <a href="https://github.com/boosarnaud-lang" target="_blank" rel="noopener">
+                    <svg viewBox="0 0 16 16"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/></svg>
+                    GitHub
+                </a>
+                <a>
+                    <svg viewBox="0 0 16 16"><path d="M8 0a8 8 0 100 16A8 8 0 008 0zM1.5 8a6.5 6.5 0 1113 0 6.5 6.5 0 01-13 0z"/><path d="M8 3.5a.75.75 0 01.75.75v3.69l2.28 1.14a.75.75 0 01-.67 1.34l-2.75-1.37A.75.75 0 017.25 8.5v-4.25A.75.75 0 018 3.5z"/></svg>
+                    Schiltigheim, France
+                </a>
+            </div>
+        </header>
+
+        <section>
+            <h2>Experience</h2>
+            <div class="experience-item">
+                <div class="role">Full Stack Engineer & Data Manager</div>
+                <div class="company">Catdata</div>
+                <div class="meta">Jul 2012 — Present · 14+ years · Schiltigheim (Remote)</div>
+                <ul class="details">
+                    <li>Full Stack Development (TypeScript, Go, PHP, React, Node.js)</li>
+                    <li>Data Management & Vehicle Data Mastery</li>
+                    <li>Project Management & Consulting</li>
+                    <li>Reverse Engineering</li>
+                    <li>AI Agents (Kiro CLI)</li>
+                    <li>Customer Support & Management</li>
+                </ul>
+            </div>
+            <div class="experience-item">
+                <div class="role">Director</div>
+                <div class="company">Catdata</div>
+                <div class="meta">Jun 2017 — Apr 2022 · 5 years</div>
+            </div>
+            <div class="experience-item">
+                <div class="role">IT Technician (Intern)</div>
+                <div class="company">Catdata</div>
+                <div class="meta">Apr 2012 — Jun 2012 · 3 months · On-site</div>
+                <ul class="details">
+                    <li>Requirements documentation</li>
+                    <li>Web programming</li>
+                </ul>
+            </div>
+        </section>
+
+        <section>
+            <h2>Skills</h2>
+            <div class="skills">
+                <span>TypeScript</span>
+                <span>Go</span>
+                <span>PHP</span>
+                <span>React</span>
+                <span>Node.js</span>
+                <span>Docker</span>
+                <span>SQL</span>
+                <span>Git</span>
+                <span>REST APIs</span>
+                <span>AI Agents</span>
+                <span>Data Management</span>
+                <span>Reverse Engineering</span>
+                <span>Project Management</span>
+            </div>
+        </section>
+
+        <section>
+            <h2>Projects</h2>
+            <div class="projects">
+                <div class="project-card">
+                    <h3>Krate</h3>
+                    <p>Personal project manager with Kanban boards, task tracking, and git integration.</p>
+                    <div class="tech">React · TypeScript · Express · Docker</div>
+                </div>
+                <div class="project-card">
+                    <h3>Swapmed</h3>
+                    <p>Marketplace connecting liberal healthcare professionals for finding replacements and recruiting associates.</p>
+                    <div class="tech">Go · REST API</div>
+                </div>
+            </div>
+        </section>
+
+        <section>
+            <h2>Education</h2>
+            <div class="education-item">
+                <div class="degree">DUT Informatique (Computer Science)</div>
+                <div class="school">IUT Robert Schuman · 2010 — 2012</div>
+            </div>
+            <div class="education-item">
+                <div class="degree">Baccalauréat Scientifique</div>
+                <div class="school">Lycée Leclerc · 2007 — 2010</div>
+            </div>
+        </section>
+
+        <footer>
+            &copy; 2026 Arnaud Boos
+        </footer>
+    </div>
+</body>
+</html>
