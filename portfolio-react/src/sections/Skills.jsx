@@ -1,38 +1,82 @@
+import { useState } from 'react';
 import './Skills.css';
 
+const groups = [
+  {
+    title: 'Languages',
+    icon: '{}',
+    items: ['TypeScript', 'Go', 'PHP', 'SQL'],
+    query: `SELECT name, proficiency
+FROM developer_skills
+WHERE category = 'languages'
+ORDER BY proficiency DESC;
+
+-- Result:
+-- TypeScript  | ████████░░ expert
+-- Go          | ███████░░░ advanced
+-- PHP         | ████████░░ expert
+-- SQL         | ███████░░░ advanced`,
+  },
+  {
+    title: 'Frameworks & Tools',
+    icon: '>_',
+    items: ['React', 'Node.js', 'Docker', 'Git', 'REST APIs'],
+    query: `SELECT tool_name, years_exp, daily_use
+FROM tech_stack
+WHERE type IN ('framework', 'tool')
+  AND status = 'active';
+
+-- Result:
+-- React     | 6y  | ✓
+-- Node.js   | 8y  | ✓
+-- Docker    | 5y  | ✓
+-- Git       | 14y | ✓
+-- REST APIs | 12y | ✓`,
+  },
+  {
+    title: 'Domain',
+    icon: '⚡',
+    items: [
+      'Automotive Data',
+      'VIN/Plate Identification',
+      'TecAlliance',
+      'OEM & IAM Catalogs',
+    ],
+    query: `SELECT expertise, specialization
+FROM domain_knowledge
+WHERE industry = 'automotive'
+  AND depth = 'expert';
+
+-- Result:
+-- Automotive Data      | 14 years
+-- VIN/Plate ID         | decoding & resolution
+-- TecAlliance          | TecDoc, TecCom
+-- OEM & IAM Catalogs   | cross-referencing`,
+  },
+  {
+    title: 'Other',
+    icon: '◈',
+    items: [
+      'AI Agents',
+      'Data Management',
+      'Reverse Engineering',
+      'Project Management',
+    ],
+    query: `SELECT skill, context
+FROM additional_competencies
+WHERE active = true
+ORDER BY relevance DESC;
+
+-- Result:
+-- AI Agents          | Kiro, Cursor, LLM tools
+-- Data Management    | ETL, pipelines, QA
+-- Reverse Eng.      | protocols, formats
+-- Project Mgmt      | consulting, delivery`,
+  },
+];
+
 export default function Skills() {
-  const groups = [
-    {
-      title: 'Languages',
-      icon: '{}',
-      items: ['TypeScript', 'Go', 'PHP', 'SQL'],
-    },
-    {
-      title: 'Frameworks & Tools',
-      icon: '>_',
-      items: ['React', 'Node.js', 'Docker', 'Git', 'REST APIs'],
-    },
-    {
-      title: 'Domain',
-      icon: '⚡',
-      items: [
-        'Automotive Data',
-        'VIN/Plate Identification',
-        'TecAlliance',
-        'OEM & IAM Catalogs',
-      ],
-    },
-    {
-      title: 'Other',
-      icon: '◈',
-      items: [
-        'AI Agents',
-        'Data Management',
-        'Reverse Engineering',
-        'Project Management',
-      ],
-    },
-  ];
+  const [activeCard, setActiveCard] = useState(null);
 
   return (
     <section id="skills" className="skills">
@@ -95,22 +139,42 @@ HAVING avg_confidence > 0.85;`}
 
         <div className="skills__grid">
           {groups.map((group) => (
-            <div key={group.title} className="skills__card">
-              <div className="skills__card-header">
-                <span className="skills__card-icon">{group.icon}</span>
-                <h3 className="skills__card-title">{group.title}</h3>
+            <div
+              key={group.title}
+              className={`skills__card ${activeCard === group.title ? 'skills__card--queried' : ''}`}
+              onClick={() => setActiveCard(activeCard === group.title ? null : group.title)}
+            >
+              {/* Default view: list */}
+              <div className="skills__card-front">
+                <div className="skills__card-header">
+                  <span className="skills__card-icon">{group.icon}</span>
+                  <h3 className="skills__card-title">{group.title}</h3>
+                  <span className="skills__card-run" title="Run query">▶</span>
+                </div>
+                <ul className="skills__list">
+                  {group.items.map((item, i) => (
+                    <li key={item} className="skills__list-item">
+                      <span className="skills__line-num">{i + 1}</span>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-              <ul className="skills__list">
-                {group.items.map((item, i) => (
-                  <li key={item} className="skills__list-item">
-                    <span className="skills__line-num">{i + 1}</span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
+
+              {/* SQL view: shown on click */}
+              <div className="skills__card-query">
+                <div className="skills__card-header skills__card-header--query">
+                  <span className="skills__card-icon">⟳</span>
+                  <h3 className="skills__card-title">Query Result</h3>
+                  <span className="skills__card-run" title="Close">✕</span>
+                </div>
+                <pre className="skills__query-code">{group.query}</pre>
+              </div>
             </div>
           ))}
         </div>
+
+        <p className="skills__hint">Click a card to run the query</p>
       </div>
     </section>
   );
