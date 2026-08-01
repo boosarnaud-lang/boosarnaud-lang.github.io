@@ -232,6 +232,8 @@
 .hero__link--cv {
   background: #2563eb;
   color: #fff;
+  cursor: pointer;
+  font-family: inherit;
 }
 
 .hero__link--cv:hover {

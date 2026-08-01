@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Hero.css';
+import { generateCV } from '../utils/generateCV';
 
 // Dynamic calculations
 const BIRTH_YEAR = 1992;
@@ -108,9 +109,9 @@ export default function Hero() {
           >
             ⟩ GitHub
           </a>
-          <a href="/cv.html" target="_blank" className="hero__link hero__link--cv">
+          <button onClick={generateCV} className="hero__link hero__link--cv">
             ↓ Download CV
-          </a>
+          </button>
         </div>
       </div>
     </section>
