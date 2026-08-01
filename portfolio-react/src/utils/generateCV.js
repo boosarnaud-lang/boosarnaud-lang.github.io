@@ -98,7 +98,7 @@ export function generateCV() {
   // === EXPERIENCE ===
   sectionTitle('Experience');
 
-  jobEntry('Full Stack Engineer & Data Manager', 'Catdata', `July 2012 — Present (${getYearsExp()}+ years)`, [
+  jobEntry('Full Stack Engineer & Data Manager', 'Catdata (TecAlliance group since 2023)', `July 2012 — Present (${getYearsExp()}+ years)`, [
     'Full Stack Development (TypeScript, Go, PHP, React, Node.js)',
     'Automotive Data: VIN/Plate identification, OEM & IAM catalogs, TecAlliance',
     'Data pipeline architecture, ETL processes, and quality assurance',

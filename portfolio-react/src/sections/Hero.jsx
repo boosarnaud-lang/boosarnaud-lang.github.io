@@ -76,7 +76,7 @@ export default function Hero() {
         </p>
 
         <p className="hero__meta">
-          {age} yo · {yearsExp}+ years at <strong>Catdata</strong> · Schiltigheim, France
+          {age} yo · {yearsExp}+ years at <strong>Catdata</strong> (TecAlliance group) · Schiltigheim, France
         </p>
 
         {/* Tech stack icons */}

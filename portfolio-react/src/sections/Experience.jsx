@@ -4,7 +4,7 @@ export default function Experience() {
   const timeline = [
     {
       title: 'Full Stack Engineer & Data Manager',
-      company: 'Catdata',
+      company: 'Catdata (TecAlliance group)',
       period: 'Jul 2012–Present',
       skills: [
         'Full Stack Dev',
