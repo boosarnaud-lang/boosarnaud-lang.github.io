@@ -61,12 +61,6 @@ export default function Hero() {
       <div className="hero__shape hero__shape--5" />
 
       <div className="hero__content">
-        {/* Availability badge */}
-        <div className="hero__badge">
-          <span className="hero__badge-dot"></span>
-          Available for consulting
-        </div>
-
         {/* Photo placeholder */}
         <div className="hero__avatar">
           <span className="hero__avatar-initials">AB</span>
@@ -114,7 +108,7 @@ export default function Hero() {
           >
             ⟩ GitHub
           </a>
-          <a href="#" className="hero__link hero__link--cv">
+          <a href="/cv.html" target="_blank" className="hero__link hero__link--cv">
             ↓ Download CV
           </a>
         </div>
