@@ -1,82 +1,91 @@
 import { useState } from 'react';
 import './Skills.css';
 
-const groups = [
+const tables = [
   {
-    title: 'Languages',
-    icon: '{}',
-    items: ['TypeScript', 'Go', 'PHP', 'SQL'],
-    query: `SELECT name, proficiency
-FROM developer_skills
-WHERE category = 'languages'
-ORDER BY proficiency DESC;
-
--- Result:
--- TypeScript  | ████████░░ expert
--- Go          | ███████░░░ advanced
--- PHP         | ████████░░ expert
--- SQL         | ███████░░░ advanced`,
-  },
-  {
-    title: 'Frameworks & Tools',
-    icon: '>_',
-    items: ['React', 'Node.js', 'Docker', 'Git', 'REST APIs'],
-    query: `SELECT tool_name, years_exp, daily_use
-FROM tech_stack
-WHERE type IN ('framework', 'tool')
-  AND status = 'active';
-
--- Result:
--- React     | 6y  | ✓
--- Node.js   | 8y  | ✓
--- Docker    | 5y  | ✓
--- Git       | 14y | ✓
--- REST APIs | 12y | ✓`,
-  },
-  {
-    title: 'Domain',
-    icon: '⚡',
-    items: [
-      'Automotive Data',
-      'VIN/Plate Identification',
-      'TecAlliance',
-      'OEM & IAM Catalogs',
+    name: 'languages',
+    query: `SELECT name, level FROM languages ORDER BY level DESC;`,
+    columns: ['name', 'level'],
+    rows: [
+      ['TypeScript', 'expert'],
+      ['Go', 'advanced'],
+      ['PHP', 'expert'],
+      ['SQL', 'advanced'],
     ],
-    query: `SELECT expertise, specialization
-FROM domain_knowledge
-WHERE industry = 'automotive'
-  AND depth = 'expert';
-
--- Result:
--- Automotive Data      | 14 years
--- VIN/Plate ID         | decoding & resolution
--- TecAlliance          | TecDoc, TecCom
--- OEM & IAM Catalogs   | cross-referencing`,
   },
   {
-    title: 'Other',
-    icon: '◈',
-    items: [
-      'AI Agents',
-      'Data Management',
-      'Reverse Engineering',
-      'Project Management',
+    name: 'frameworks_tools',
+    query: `SELECT name, years, daily_use FROM frameworks_tools WHERE active = true;`,
+    columns: ['name', 'years', 'daily_use'],
+    rows: [
+      ['React', '6', '✓'],
+      ['Node.js', '8', '✓'],
+      ['Docker', '5', '✓'],
+      ['Git', '14', '✓'],
+      ['REST APIs', '12', '✓'],
     ],
-    query: `SELECT skill, context
-FROM additional_competencies
-WHERE active = true
-ORDER BY relevance DESC;
-
--- Result:
--- AI Agents          | Kiro, Cursor, LLM tools
--- Data Management    | ETL, pipelines, QA
--- Reverse Eng.      | protocols, formats
--- Project Mgmt      | consulting, delivery`,
+  },
+  {
+    name: 'domain_expertise',
+    query: `SELECT domain, specialization FROM domain_expertise WHERE depth = 'expert';`,
+    columns: ['domain', 'specialization'],
+    rows: [
+      ['Automotive Data', '14 years'],
+      ['VIN/Plate ID', 'decoding & resolution'],
+      ['TecAlliance', 'TecDoc, TecCom'],
+      ['OEM & IAM Catalogs', 'cross-referencing'],
+    ],
+  },
+  {
+    name: 'other_skills',
+    query: `SELECT skill, context FROM other_skills ORDER BY relevance DESC;`,
+    columns: ['skill', 'context'],
+    rows: [
+      ['AI Agents', 'Kiro, Cursor, LLM tooling'],
+      ['Data Management', 'ETL, pipelines, QA'],
+      ['Reverse Engineering', 'protocols, formats'],
+      ['Project Management', 'consulting, delivery'],
+    ],
   },
 ];
 
 export default function Skills() {
-  const [activeCard, setActiveCard] = useState(null);
+  const [currentQuery, setCurrentQuery] = useState('');
+  const [result, setResult] = useState(null);
+  const [isRunning, setIsRunning] = useState(false);
+
+  const runQuery = (query) => {
+    setCurrentQuery(query);
+    setIsRunning(true);
+    setResult(null);
+
+    // Simulate execution delay
+    setTimeout(() => {
+      const table = tables.find((t) => query.includes(t.name));
+      if (table) {
+        setResult(table);
+      } else {
+        setResult({ error: `Table not found. Available tables: ${tables.map(t => t.name).join(', ')}` });
+      }
+      setIsRunning(false);
+    }, 600);
+  };
+
+  const handleTableClick = (table) => {
+    runQuery(table.query);
+  };
+
+  const handleRun = () => {
+    if (currentQuery.trim()) {
+      runQuery(currentQuery);
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+      handleRun();
+    }
+  };
 
   return (
     <section id="skills" className="skills">
@@ -120,15 +129,14 @@ HAVING avg_confidence > 0.85;`}
         </div>
       </div>
 
-      {/* IDE-style top bar */}
+      {/* IDE top bar */}
       <div className="skills__ide-bar">
         <div className="skills__ide-dots">
           <span></span><span></span><span></span>
         </div>
         <div className="skills__ide-tabs">
-          <span className="skills__ide-tab active">skills.ts</span>
-          <span className="skills__ide-tab">config.go</span>
-          <span className="skills__ide-tab">schema.sql</span>
+          <span className="skills__ide-tab">skills_db</span>
+          <span className="skills__ide-tab active">query.sql</span>
         </div>
       </div>
 
@@ -137,44 +145,94 @@ HAVING avg_confidence > 0.85;`}
           <span className="skills__title-comment">// </span>Skills
         </h2>
 
-        <div className="skills__grid">
-          {groups.map((group) => (
-            <div
-              key={group.title}
-              className={`skills__card ${activeCard === group.title ? 'skills__card--queried' : ''}`}
-              onClick={() => setActiveCard(activeCard === group.title ? null : group.title)}
-            >
-              {/* Default view: list */}
-              <div className="skills__card-front">
-                <div className="skills__card-header">
-                  <span className="skills__card-icon">{group.icon}</span>
-                  <h3 className="skills__card-title">{group.title}</h3>
-                  <span className="skills__card-run" title="Run query">▶</span>
-                </div>
-                <ul className="skills__list">
-                  {group.items.map((item, i) => (
-                    <li key={item} className="skills__list-item">
-                      <span className="skills__line-num">{i + 1}</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* SQL view: shown on click */}
-              <div className="skills__card-query">
-                <div className="skills__card-header skills__card-header--query">
-                  <span className="skills__card-icon">⟳</span>
-                  <h3 className="skills__card-title">Query Result</h3>
-                  <span className="skills__card-run" title="Close">✕</span>
-                </div>
-                <pre className="skills__query-code">{group.query}</pre>
-              </div>
+        <div className="skills__workspace">
+          {/* Left: table explorer */}
+          <div className="skills__explorer">
+            <div className="skills__explorer-header">
+              <span className="skills__explorer-icon">⊞</span>
+              Tables
             </div>
-          ))}
-        </div>
+            <ul className="skills__tables">
+              {tables.map((table) => (
+                <li
+                  key={table.name}
+                  className={`skills__table-item ${currentQuery.includes(table.name) ? 'active' : ''}`}
+                  onClick={() => handleTableClick(table)}
+                >
+                  <span className="skills__table-icon">⊟</span>
+                  {table.name}
+                  <span className="skills__table-rows">{table.rows.length}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
 
-        <p className="skills__hint">Click a card to run the query</p>
+          {/* Right: console */}
+          <div className="skills__console">
+            {/* Query editor */}
+            <div className="skills__editor">
+              <div className="skills__editor-header">
+                <span>Query Editor</span>
+                <button className="skills__run-btn" onClick={handleRun} disabled={isRunning}>
+                  {isRunning ? '⟳ Running...' : '▶ Run'}
+                </button>
+              </div>
+              <textarea
+                className="skills__textarea"
+                value={currentQuery}
+                onChange={(e) => setCurrentQuery(e.target.value)}
+                onKeyDown={handleKeyDown}
+                placeholder="-- Click a table or write your SQL here&#10;-- Press Ctrl+Enter to execute"
+                spellCheck={false}
+              />
+            </div>
+
+            {/* Results */}
+            <div className="skills__results">
+              <div className="skills__results-header">
+                {result && !result.error && (
+                  <span className="skills__results-count">
+                    {result.rows.length} row{result.rows.length > 1 ? 's' : ''} returned
+                  </span>
+                )}
+                {isRunning && <span className="skills__results-loading">Executing...</span>}
+              </div>
+
+              {result && result.error && (
+                <div className="skills__results-error">{result.error}</div>
+              )}
+
+              {result && !result.error && (
+                <div className="skills__results-table-wrapper">
+                  <table className="skills__results-table">
+                    <thead>
+                      <tr>
+                        {result.columns.map((col) => (
+                          <th key={col}>{col}</th>
+                        ))}
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {result.rows.map((row, i) => (
+                        <tr key={i}>
+                          {row.map((cell, j) => (
+                            <td key={j}>{cell}</td>
+                          ))}
+                        </tr>
+                      ))}
+                    </tbody>
+                  </table>
+                </div>
+              )}
+
+              {!result && !isRunning && (
+                <div className="skills__results-empty">
+                  Click a table to explore skills
+                </div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   );
