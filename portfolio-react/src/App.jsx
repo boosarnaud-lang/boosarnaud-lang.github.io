@@ -10,6 +10,9 @@ import './App.css'
 function App() {
   return (
     <>
+      <div className="wip-banner">
+        🚧 This portfolio is a work in progress — crafted by Arnaud & AI
+      </div>
       <Nav />
       <Hero />
       <Experience />
