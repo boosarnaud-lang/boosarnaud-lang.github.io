@@ -81,43 +81,49 @@
 /* ===== THEME VARIANTS ===== */
 
 /* Hero — white glass, blue accent */
-.nav[data-section="hero"] { background: rgba(255, 255, 255, 0.7); color: #1e293b; }
+.nav[data-section="hero"] { background: rgba(255, 255, 255, 0.85); color: #1e293b; }
 .nav[data-section="hero"] .nav-logo { color: #2563eb; }
+.nav[data-section="hero"] .nav-burger__line { background: #2563eb; }
 .nav[data-section="hero"] .nav-link { color: #1e293b; }
 .nav[data-section="hero"] .nav-link:hover { background: rgba(37, 99, 235, 0.1); }
 .nav[data-section="hero"] .nav-link.active { background: #2563eb; color: #fff; }
 
 /* Experience — warm beige glass, terracotta */
-.nav[data-section="experience"] { background: rgba(255, 247, 237, 0.75); color: #451a03; }
+.nav[data-section="experience"] { background: rgba(255, 247, 237, 0.85); color: #451a03; }
 .nav[data-section="experience"] .nav-logo { color: #b45309; }
+.nav[data-section="experience"] .nav-burger__line { background: #b45309; }
 .nav[data-section="experience"] .nav-link { color: #451a03; }
 .nav[data-section="experience"] .nav-link:hover { background: rgba(180, 83, 9, 0.1); }
 .nav[data-section="experience"] .nav-link.active { background: #b45309; color: #fff; }
 
 /* Skills — navy glass, cyan */
-.nav[data-section="skills"] { background: rgba(15, 23, 42, 0.8); color: #e2e8f0; }
+.nav[data-section="skills"] { background: rgba(15, 23, 42, 0.92); color: #e2e8f0; }
 .nav[data-section="skills"] .nav-logo { color: #22d3ee; }
+.nav[data-section="skills"] .nav-burger__line { background: #22d3ee; }
 .nav[data-section="skills"] .nav-link { color: #e2e8f0; }
 .nav[data-section="skills"] .nav-link:hover { background: rgba(34, 211, 238, 0.15); }
 .nav[data-section="skills"] .nav-link.active { background: #22d3ee; color: #0f172a; }
 
 /* Domain — dark glass, amber */
-.nav[data-section="domain"] { background: rgba(10, 14, 20, 0.85); color: #e2e8f0; }
+.nav[data-section="domain"] { background: rgba(10, 14, 20, 0.92); color: #e2e8f0; }
 .nav[data-section="domain"] .nav-logo { color: #f59e0b; }
+.nav[data-section="domain"] .nav-burger__line { background: #f59e0b; }
 .nav[data-section="domain"] .nav-link { color: #e2e8f0; }
 .nav[data-section="domain"] .nav-link:hover { background: rgba(245, 158, 11, 0.15); }
 .nav[data-section="domain"] .nav-link.active { background: #f59e0b; color: #0a0e14; }
 
 /* Projects — pink glass, purple */
-.nav[data-section="projects"] { background: rgba(253, 242, 248, 0.75); color: #1e1b4b; }
+.nav[data-section="projects"] { background: rgba(253, 242, 248, 0.85); color: #1e1b4b; }
 .nav[data-section="projects"] .nav-logo { color: #a855f7; }
+.nav[data-section="projects"] .nav-burger__line { background: #a855f7; }
 .nav[data-section="projects"] .nav-link { color: #1e1b4b; }
 .nav[data-section="projects"] .nav-link:hover { background: rgba(168, 85, 247, 0.1); }
 .nav[data-section="projects"] .nav-link.active { background: #a855f7; color: #fff; }
 
 /* Education — mint glass, green */
-.nav[data-section="education"] { background: rgba(240, 253, 244, 0.75); color: #14532d; }
+.nav[data-section="education"] { background: rgba(240, 253, 244, 0.85); color: #14532d; }
 .nav[data-section="education"] .nav-logo { color: #16a34a; }
+.nav[data-section="education"] .nav-burger__line { background: #16a34a; }
 .nav[data-section="education"] .nav-link { color: #14532d; }
 .nav[data-section="education"] .nav-link:hover { background: rgba(22, 163, 74, 0.1); }
 .nav[data-section="education"] .nav-link.active { background: #16a34a; color: #fff; }
