@@ -4,47 +4,58 @@ import './Skills.css';
 const tables = [
   {
     name: 'languages',
-    query: `SELECT name, level FROM languages ORDER BY level DESC;`,
-    columns: ['name', 'level'],
+    query: `SELECT name, level, years_exp
+FROM languages
+WHERE active = true
+ORDER BY years_exp DESC;`,
+    columns: ['name', 'level', 'years_exp'],
     rows: [
-      ['TypeScript', 'expert'],
-      ['Go', 'advanced'],
-      ['PHP', 'expert'],
-      ['SQL', 'advanced'],
+      ['PHP', 'expert', '14'],
+      ['SQL', 'advanced', '14'],
+      ['TypeScript', 'expert', '8'],
+      ['Go', 'advanced', '4'],
     ],
   },
   {
     name: 'frameworks_tools',
-    query: `SELECT name, years, daily_use FROM frameworks_tools WHERE active = true;`,
-    columns: ['name', 'years', 'daily_use'],
+    query: `SELECT name, category, daily_use
+FROM frameworks_tools
+WHERE status = 'active'
+ORDER BY category;`,
+    columns: ['name', 'category', 'daily_use'],
     rows: [
-      ['React', '6', '✓'],
-      ['Node.js', '8', '✓'],
-      ['Docker', '5', '✓'],
-      ['Git', '14', '✓'],
-      ['REST APIs', '12', '✓'],
+      ['React', 'framework', 'true'],
+      ['Node.js', 'runtime', 'true'],
+      ['Docker', 'devops', 'true'],
+      ['Git', 'vcs', 'true'],
+      ['REST APIs', 'architecture', 'true'],
     ],
   },
   {
     name: 'domain_expertise',
-    query: `SELECT domain, specialization FROM domain_expertise WHERE depth = 'expert';`,
-    columns: ['domain', 'specialization'],
+    query: `SELECT domain, specialization, depth
+FROM domain_expertise
+WHERE industry = 'automotive';`,
+    columns: ['domain', 'specialization', 'depth'],
     rows: [
-      ['Automotive Data', '14 years'],
-      ['VIN/Plate ID', 'decoding & resolution'],
-      ['TecAlliance', 'TecDoc, TecCom'],
-      ['OEM & IAM Catalogs', 'cross-referencing'],
+      ['Automotive Data', 'vehicle ecosystems', 'expert'],
+      ['VIN/Plate ID', 'decoding & resolution', 'expert'],
+      ['TecAlliance', 'TecDoc, TecCom', 'expert'],
+      ['OEM & IAM Catalogs', 'cross-referencing', 'expert'],
     ],
   },
   {
     name: 'other_skills',
-    query: `SELECT skill, context FROM other_skills ORDER BY relevance DESC;`,
-    columns: ['skill', 'context'],
+    query: `SELECT skill, tools, experience
+FROM other_skills
+WHERE relevance > 0.7
+ORDER BY relevance DESC;`,
+    columns: ['skill', 'tools', 'experience'],
     rows: [
-      ['AI Agents', 'Kiro, Cursor, LLM tooling'],
-      ['Data Management', 'ETL, pipelines, QA'],
-      ['Reverse Engineering', 'protocols, formats'],
-      ['Project Management', 'consulting, delivery'],
+      ['AI Agents', 'Kiro, Cursor, Claude', 'active'],
+      ['Data Management', 'ETL, pipelines', '14 years'],
+      ['Reverse Engineering', 'protocols, formats', '10 years'],
+      ['Project Management', 'consulting', '8 years'],
     ],
   },
 ];
