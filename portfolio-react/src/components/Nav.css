@@ -1,0 +1,186 @@
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 60px;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: background 0.5s ease, color 0.5s ease;
+  display: flex;
+  align-items: center;
+}
+
+.nav-inner {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  font-weight: 900;
+  font-size: 1.4rem;
+  text-decoration: none;
+  transition: color 0.5s ease;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  gap: 4px;
+}
+
+.nav-link {
+  text-decoration: none;
+  font-size: 0.85rem;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 20px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+/* Theme: Hero — white glass, blue accent, dark text */
+.nav[data-section="hero"] {
+  background: rgba(255, 255, 255, 0.7);
+  color: #1e293b;
+}
+.nav[data-section="hero"] .nav-logo {
+  color: #2563eb;
+}
+.nav[data-section="hero"] .nav-link {
+  color: #1e293b;
+}
+.nav[data-section="hero"] .nav-link:hover {
+  background: rgba(37, 99, 235, 0.1);
+}
+.nav[data-section="hero"] .nav-link.active {
+  background: #2563eb;
+  color: #fff;
+}
+
+/* Theme: Experience — warm beige glass, terracotta accent */
+.nav[data-section="experience"] {
+  background: rgba(255, 247, 237, 0.75);
+  color: #451a03;
+}
+.nav[data-section="experience"] .nav-logo {
+  color: #b45309;
+}
+.nav[data-section="experience"] .nav-link {
+  color: #451a03;
+}
+.nav[data-section="experience"] .nav-link:hover {
+  background: rgba(180, 83, 9, 0.1);
+}
+.nav[data-section="experience"] .nav-link.active {
+  background: #b45309;
+  color: #fff;
+}
+
+/* Theme: Skills — navy glass, cyan accent, light text */
+.nav[data-section="skills"] {
+  background: rgba(15, 23, 42, 0.8);
+  color: #e2e8f0;
+}
+.nav[data-section="skills"] .nav-logo {
+  color: #22d3ee;
+}
+.nav[data-section="skills"] .nav-link {
+  color: #e2e8f0;
+}
+.nav[data-section="skills"] .nav-link:hover {
+  background: rgba(34, 211, 238, 0.15);
+}
+.nav[data-section="skills"] .nav-link.active {
+  background: #22d3ee;
+  color: #0f172a;
+}
+
+/* Theme: Domain — very dark glass, amber accent */
+.nav[data-section="domain"] {
+  background: rgba(10, 14, 20, 0.85);
+  color: #e2e8f0;
+}
+.nav[data-section="domain"] .nav-logo {
+  color: #f59e0b;
+}
+.nav[data-section="domain"] .nav-link {
+  color: #e2e8f0;
+}
+.nav[data-section="domain"] .nav-link:hover {
+  background: rgba(245, 158, 11, 0.15);
+}
+.nav[data-section="domain"] .nav-link.active {
+  background: #f59e0b;
+  color: #0a0e14;
+}
+
+/* Theme: Projects — pink glass, purple accent */
+.nav[data-section="projects"] {
+  background: rgba(253, 242, 248, 0.75);
+  color: #1e1b4b;
+}
+.nav[data-section="projects"] .nav-logo {
+  color: #a855f7;
+}
+.nav[data-section="projects"] .nav-link {
+  color: #1e1b4b;
+}
+.nav[data-section="projects"] .nav-link:hover {
+  background: rgba(168, 85, 247, 0.1);
+}
+.nav[data-section="projects"] .nav-link.active {
+  background: #a855f7;
+  color: #fff;
+}
+
+/* Theme: Education — mint glass, green accent */
+.nav[data-section="education"] {
+  background: rgba(240, 253, 244, 0.75);
+  color: #14532d;
+}
+.nav[data-section="education"] .nav-logo {
+  color: #16a34a;
+}
+.nav[data-section="education"] .nav-link {
+  color: #14532d;
+}
+.nav[data-section="education"] .nav-link:hover {
+  background: rgba(22, 163, 74, 0.1);
+}
+.nav[data-section="education"] .nav-link.active {
+  background: #16a34a;
+  color: #fff;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .nav-link {
+    font-size: 0.75rem;
+    padding: 5px 10px;
+  }
+
+  .nav-links {
+    gap: 2px;
+  }
+
+  .nav-logo {
+    font-size: 1.2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .nav-inner {
+    padding: 0 12px;
+  }
+
+  .nav-link {
+    font-size: 0.7rem;
+    padding: 4px 8px;
+  }
+}

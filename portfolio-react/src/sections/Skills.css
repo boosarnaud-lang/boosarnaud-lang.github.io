@@ -1,0 +1,130 @@
+.skills {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, #0c1929, #0a2e3d);
+  overflow: hidden;
+  font-family: 'Inter', sans-serif;
+  padding: 4rem 2rem;
+}
+
+/* Floating bubbles */
+.skills__bubble {
+  position: absolute;
+  border-radius: 50%;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid rgba(56, 189, 248, 0.15);
+  pointer-events: none;
+}
+
+.skills__bubble--1 {
+  width: 200px;
+  height: 200px;
+  top: 10%;
+  left: 5%;
+  animation: skillsFloat 16s ease-in-out infinite;
+}
+
+.skills__bubble--2 {
+  width: 120px;
+  height: 120px;
+  top: 60%;
+  right: 8%;
+  animation: skillsFloat 20s ease-in-out infinite reverse;
+}
+
+.skills__bubble--3 {
+  width: 80px;
+  height: 80px;
+  bottom: 15%;
+  left: 20%;
+  animation: skillsFloat 12s ease-in-out infinite;
+}
+
+.skills__bubble--4 {
+  width: 150px;
+  height: 150px;
+  top: 5%;
+  right: 20%;
+  animation: skillsFloat 22s ease-in-out infinite reverse;
+}
+
+.skills__bubble--5 {
+  width: 60px;
+  height: 60px;
+  bottom: 30%;
+  right: 35%;
+  animation: skillsFloat 14s ease-in-out infinite;
+}
+
+@keyframes skillsFloat {
+  0%, 100% { transform: translateY(0) scale(1); }
+  50% { transform: translateY(-30px) scale(1.05); }
+}
+
+/* Content */
+.skills__content {
+  position: relative;
+  z-index: 1;
+  max-width: 900px;
+  width: 100%;
+}
+
+.skills__title {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 800;
+  color: #fff;
+  margin: 0 0 3rem;
+  text-align: center;
+}
+
+/* Grid */
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Glass cards */
+.skills__card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 1.5rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition: transform 0.2s, border-color 0.2s;
+}
+
+.skills__card:hover {
+  transform: translateY(-4px);
+  border-color: rgba(56, 189, 248, 0.4);
+}
+
+.skills__card-title {
+  font-size: 1rem;
+  font-weight: 700;
+  color: #38bdf8;
+  margin: 0 0 1rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.skills__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.skills__list-item {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.85);
+  padding: 0.4rem 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.skills__list-item:last-child {
+  border-bottom: none;
+}
