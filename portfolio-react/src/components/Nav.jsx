@@ -13,6 +13,7 @@ const navLinks = [
 
 function Nav() {
   const [activeSection, setActiveSection] = useState('hero')
+  const [menuOpen, setMenuOpen] = useState(false)
 
   useEffect(() => {
     const observers = []
@@ -43,15 +44,28 @@ function Nav() {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' })
     }
+    setMenuOpen(false)
   }
 
   return (
-    <nav className="nav" data-section={activeSection}>
+    <nav className={`nav ${menuOpen ? 'nav--open' : ''}`} data-section={activeSection}>
       <div className="nav-inner">
         <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, 'hero')}>
           AB
         </a>
-        <ul className="nav-links">
+
+        <button
+          className="nav-burger"
+          onClick={() => setMenuOpen(!menuOpen)}
+          aria-label="Toggle menu"
+          aria-expanded={menuOpen}
+        >
+          <span className="nav-burger__line"></span>
+          <span className="nav-burger__line"></span>
+          <span className="nav-burger__line"></span>
+        </button>
+
+        <ul className={`nav-links ${menuOpen ? 'nav-links--open' : ''}`}>
           {navLinks.map(({ id, label }) => (
             <li key={id}>
               <a

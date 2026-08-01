@@ -44,143 +44,132 @@
   transition: background 0.3s ease, color 0.3s ease;
 }
 
-/* Theme: Hero — white glass, blue accent, dark text */
-.nav[data-section="hero"] {
-  background: rgba(255, 255, 255, 0.7);
-  color: #1e293b;
-}
-.nav[data-section="hero"] .nav-logo {
-  color: #2563eb;
-}
-.nav[data-section="hero"] .nav-link {
-  color: #1e293b;
-}
-.nav[data-section="hero"] .nav-link:hover {
-  background: rgba(37, 99, 235, 0.1);
-}
-.nav[data-section="hero"] .nav-link.active {
-  background: #2563eb;
-  color: #fff;
+/* Hamburger button — hidden on desktop */
+.nav-burger {
+  display: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  flex-direction: column;
+  gap: 5px;
+  z-index: 10001;
 }
 
-/* Theme: Experience — warm beige glass, terracotta accent */
-.nav[data-section="experience"] {
-  background: rgba(255, 247, 237, 0.75);
-  color: #451a03;
-}
-.nav[data-section="experience"] .nav-logo {
-  color: #b45309;
-}
-.nav[data-section="experience"] .nav-link {
-  color: #451a03;
-}
-.nav[data-section="experience"] .nav-link:hover {
-  background: rgba(180, 83, 9, 0.1);
-}
-.nav[data-section="experience"] .nav-link.active {
-  background: #b45309;
-  color: #fff;
+.nav-burger__line {
+  display: block;
+  width: 24px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Theme: Skills — navy glass, cyan accent, light text */
-.nav[data-section="skills"] {
-  background: rgba(15, 23, 42, 0.8);
-  color: #e2e8f0;
-}
-.nav[data-section="skills"] .nav-logo {
-  color: #22d3ee;
-}
-.nav[data-section="skills"] .nav-link {
-  color: #e2e8f0;
-}
-.nav[data-section="skills"] .nav-link:hover {
-  background: rgba(34, 211, 238, 0.15);
-}
-.nav[data-section="skills"] .nav-link.active {
-  background: #22d3ee;
-  color: #0f172a;
+/* Burger animation when open */
+.nav--open .nav-burger__line:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
 }
 
-/* Theme: Domain — very dark glass, amber accent */
-.nav[data-section="domain"] {
-  background: rgba(10, 14, 20, 0.85);
-  color: #e2e8f0;
-}
-.nav[data-section="domain"] .nav-logo {
-  color: #f59e0b;
-}
-.nav[data-section="domain"] .nav-link {
-  color: #e2e8f0;
-}
-.nav[data-section="domain"] .nav-link:hover {
-  background: rgba(245, 158, 11, 0.15);
-}
-.nav[data-section="domain"] .nav-link.active {
-  background: #f59e0b;
-  color: #0a0e14;
+.nav--open .nav-burger__line:nth-child(2) {
+  opacity: 0;
 }
 
-/* Theme: Projects — pink glass, purple accent */
-.nav[data-section="projects"] {
-  background: rgba(253, 242, 248, 0.75);
-  color: #1e1b4b;
-}
-.nav[data-section="projects"] .nav-logo {
-  color: #a855f7;
-}
-.nav[data-section="projects"] .nav-link {
-  color: #1e1b4b;
-}
-.nav[data-section="projects"] .nav-link:hover {
-  background: rgba(168, 85, 247, 0.1);
-}
-.nav[data-section="projects"] .nav-link.active {
-  background: #a855f7;
-  color: #fff;
+.nav--open .nav-burger__line:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
 }
 
-/* Theme: Education — mint glass, green accent */
-.nav[data-section="education"] {
-  background: rgba(240, 253, 244, 0.75);
-  color: #14532d;
-}
-.nav[data-section="education"] .nav-logo {
-  color: #16a34a;
-}
-.nav[data-section="education"] .nav-link {
-  color: #14532d;
-}
-.nav[data-section="education"] .nav-link:hover {
-  background: rgba(22, 163, 74, 0.1);
-}
-.nav[data-section="education"] .nav-link.active {
-  background: #16a34a;
-  color: #fff;
-}
+/* ===== THEME VARIANTS ===== */
 
-/* Responsive */
+/* Hero — white glass, blue accent */
+.nav[data-section="hero"] { background: rgba(255, 255, 255, 0.7); color: #1e293b; }
+.nav[data-section="hero"] .nav-logo { color: #2563eb; }
+.nav[data-section="hero"] .nav-link { color: #1e293b; }
+.nav[data-section="hero"] .nav-link:hover { background: rgba(37, 99, 235, 0.1); }
+.nav[data-section="hero"] .nav-link.active { background: #2563eb; color: #fff; }
+
+/* Experience — warm beige glass, terracotta */
+.nav[data-section="experience"] { background: rgba(255, 247, 237, 0.75); color: #451a03; }
+.nav[data-section="experience"] .nav-logo { color: #b45309; }
+.nav[data-section="experience"] .nav-link { color: #451a03; }
+.nav[data-section="experience"] .nav-link:hover { background: rgba(180, 83, 9, 0.1); }
+.nav[data-section="experience"] .nav-link.active { background: #b45309; color: #fff; }
+
+/* Skills — navy glass, cyan */
+.nav[data-section="skills"] { background: rgba(15, 23, 42, 0.8); color: #e2e8f0; }
+.nav[data-section="skills"] .nav-logo { color: #22d3ee; }
+.nav[data-section="skills"] .nav-link { color: #e2e8f0; }
+.nav[data-section="skills"] .nav-link:hover { background: rgba(34, 211, 238, 0.15); }
+.nav[data-section="skills"] .nav-link.active { background: #22d3ee; color: #0f172a; }
+
+/* Domain — dark glass, amber */
+.nav[data-section="domain"] { background: rgba(10, 14, 20, 0.85); color: #e2e8f0; }
+.nav[data-section="domain"] .nav-logo { color: #f59e0b; }
+.nav[data-section="domain"] .nav-link { color: #e2e8f0; }
+.nav[data-section="domain"] .nav-link:hover { background: rgba(245, 158, 11, 0.15); }
+.nav[data-section="domain"] .nav-link.active { background: #f59e0b; color: #0a0e14; }
+
+/* Projects — pink glass, purple */
+.nav[data-section="projects"] { background: rgba(253, 242, 248, 0.75); color: #1e1b4b; }
+.nav[data-section="projects"] .nav-logo { color: #a855f7; }
+.nav[data-section="projects"] .nav-link { color: #1e1b4b; }
+.nav[data-section="projects"] .nav-link:hover { background: rgba(168, 85, 247, 0.1); }
+.nav[data-section="projects"] .nav-link.active { background: #a855f7; color: #fff; }
+
+/* Education — mint glass, green */
+.nav[data-section="education"] { background: rgba(240, 253, 244, 0.75); color: #14532d; }
+.nav[data-section="education"] .nav-logo { color: #16a34a; }
+.nav[data-section="education"] .nav-link { color: #14532d; }
+.nav[data-section="education"] .nav-link:hover { background: rgba(22, 163, 74, 0.1); }
+.nav[data-section="education"] .nav-link.active { background: #16a34a; color: #fff; }
+
+/* ===== RESPONSIVE — MOBILE ===== */
+
 @media (max-width: 768px) {
-  .nav-link {
-    font-size: 0.75rem;
-    padding: 5px 10px;
+  .nav-burger {
+    display: flex;
   }
 
   .nav-links {
-    gap: 2px;
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 70%;
+    max-width: 300px;
+    height: 100vh;
+    flex-direction: column;
+    gap: 0;
+    padding: 80px 24px 24px;
+    transition: right 0.3s ease, background 0.3s ease;
+    box-shadow: -4px 0 20px rgba(0, 0, 0, 0.1);
   }
 
-  .nav-logo {
-    font-size: 1.2rem;
+  /* Inherit section theme background for mobile menu */
+  .nav[data-section="hero"] .nav-links { background: rgba(255, 255, 255, 0.97); }
+  .nav[data-section="experience"] .nav-links { background: rgba(255, 247, 237, 0.97); }
+  .nav[data-section="skills"] .nav-links { background: rgba(15, 23, 42, 0.97); }
+  .nav[data-section="domain"] .nav-links { background: rgba(10, 14, 20, 0.97); }
+  .nav[data-section="projects"] .nav-links { background: rgba(253, 242, 248, 0.97); }
+  .nav[data-section="education"] .nav-links { background: rgba(240, 253, 244, 0.97); }
+
+  .nav-links--open {
+    right: 0;
+  }
+
+  .nav-link {
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: 10px;
+    width: 100%;
+    display: block;
   }
 }
 
 @media (max-width: 480px) {
   .nav-inner {
-    padding: 0 12px;
+    padding: 0 16px;
   }
 
-  .nav-link {
-    font-size: 0.7rem;
-    padding: 4px 8px;
+  .nav-links {
+    width: 80%;
   }
 }
