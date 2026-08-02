@@ -3,6 +3,18 @@ import './Skills.css';
 
 const tables = [
   {
+    name: 'spoken_languages',
+    query: `SELECT language, level, source
+FROM spoken_languages
+ORDER BY level DESC;`,
+    columns: ['language', 'level', 'source'],
+    rows: [
+      ['French', 'native', '—'],
+      ['English', 'fluent', '—'],
+      ['Japanese', 'learning', 'Duolingo'],
+    ],
+  },
+  {
     name: 'languages',
     query: `SELECT name, level, years_exp
 FROM languages
