@@ -25,11 +25,33 @@ function getSchedule() {
   return (day === 0 || day === 6) ? weekendSchedule : weekdaySchedule;
 }
 
+// Dynamic dates
+const DOG_BIRTH = new Date(2025, 5, 17); // June 17, 2025
+const MARRIAGE_DATE = new Date(2022, 1, 12); // February 12, 2022
+
+function getDogAge() {
+  const now = new Date();
+  const months = (now.getFullYear() - DOG_BIRTH.getFullYear()) * 12 + (now.getMonth() - DOG_BIRTH.getMonth());
+  if (months < 12) return `${months} months old`;
+  const years = Math.floor(months / 12);
+  const rem = months % 12;
+  return rem > 0 ? `${years}y ${rem}m old` : `${years}y old`;
+}
+
+function getMarriageDuration() {
+  const now = new Date();
+  const years = now.getFullYear() - MARRIAGE_DATE.getFullYear();
+  const monthDiff = now.getMonth() - MARRIAGE_DATE.getMonth();
+  const adjusted = monthDiff < 0 || (monthDiff === 0 && now.getDate() < MARRIAGE_DATE.getDate()) ? years - 1 : years;
+  return `${adjusted}+ years`;
+}
+
 // Fun facts
 const facts = [
   { icon: '🍫', text: 'Ice chocolate in summer, hot chocolate in winter' },
   { icon: '🦉', text: 'Night owl — best ideas after 22h' },
-  { icon: '🐕', text: 'Golden Retriever dad (born June 2025)' },
+  { icon: '🐕', text: `Golden Retriever (${getDogAge()})` },
+  { icon: '💍', text: `Married since Feb 2022 (${getMarriageDuration()})` },
   { icon: '🎮', text: 'Gamer — after hours ritual' },
   { icon: '⚽', text: 'Football, cycling, padel' },
   { icon: '🎸', text: 'Music = rock mostly, listens to everything' },
