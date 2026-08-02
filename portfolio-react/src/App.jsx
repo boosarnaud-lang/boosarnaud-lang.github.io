@@ -6,13 +6,16 @@ import DomainExpertise from './sections/DomainExpertise'
 import GetToKnowMe from './sections/GetToKnowMe'
 import Projects from './sections/Projects'
 import Education from './sections/Education'
+import { LanguageProvider, useLang } from './context/LanguageContext'
 import './App.css'
 
-function App() {
+function AppContent() {
+  const { t } = useLang();
+  
   return (
     <>
       <div className="wip-banner">
-        🚧 This portfolio is a work in progress — crafted by Arnaud & AI
+        {t.wip}
       </div>
       <Nav />
       <Hero />
@@ -22,8 +25,16 @@ function App() {
       <GetToKnowMe />
       <Projects />
       <Education />
-      <footer className="footer">&copy; 2026 Arnaud Boos</footer>
+      <footer className="footer">{t.footer}</footer>
     </>
+  )
+}
+
+function App() {
+  return (
+    <LanguageProvider>
+      <AppContent />
+    </LanguageProvider>
   )
 }
 

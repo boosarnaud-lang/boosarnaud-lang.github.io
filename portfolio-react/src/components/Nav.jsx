@@ -1,20 +1,23 @@
 import { useState, useEffect } from 'react'
+import { useLang } from '../context/LanguageContext'
 import './Nav.css'
 
 const sections = ['hero', 'experience', 'skills', 'domain', 'about', 'projects', 'education']
-const navLinks = [
-  { id: 'hero', label: 'Home' },
-  { id: 'experience', label: 'Experience' },
-  { id: 'skills', label: 'Skills' },
-  { id: 'domain', label: 'Expertise' },
-  { id: 'about', label: 'About' },
-  { id: 'projects', label: 'Projects' },
-  { id: 'education', label: 'Education' },
-]
 
 function Nav() {
+  const { t, lang, toggleLang } = useLang();
   const [activeSection, setActiveSection] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
+
+  const navLinks = [
+    { id: 'hero', label: t.nav.home },
+    { id: 'experience', label: t.nav.experience },
+    { id: 'skills', label: t.nav.skills },
+    { id: 'domain', label: t.nav.expertise },
+    { id: 'about', label: t.nav.about },
+    { id: 'projects', label: t.nav.projects },
+    { id: 'education', label: t.nav.education },
+  ]
 
   useEffect(() => {
     document.body.style.overflow = menuOpen ? 'hidden' : '';
@@ -59,6 +62,14 @@ function Nav() {
         <a href="#hero" className="nav-logo" onClick={(e) => handleClick(e, 'hero')}>
           AB
         </a>
+
+        <button
+          className="nav-lang"
+          onClick={toggleLang}
+          aria-label="Toggle language"
+        >
+          {lang === 'en' ? 'FR' : 'EN'}
+        </button>
 
         <button
           className="nav-burger"

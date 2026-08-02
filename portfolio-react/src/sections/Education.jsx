@@ -1,7 +1,10 @@
+import { useLang } from '../context/LanguageContext';
 import './Education.css';
 import { education } from '../data/portfolio.js';
 
 export default function Education() {
+  const { t } = useLang();
+  
   return (
     <section id="education" className="education-section">
       {/* Decorative botanical shapes */}
@@ -12,7 +15,7 @@ export default function Education() {
       <div className="edu-branch edu-branch--1"></div>
       <div className="edu-branch edu-branch--2"></div>
 
-      <h2 className="education-title">Education</h2>
+      <h2 className="education-title">{t.education.title}</h2>
 
       <div className="education-timeline">
         {education.map((edu) => (

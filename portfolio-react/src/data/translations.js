@@ -1,0 +1,26 @@
+export const translations = {
+  en: {
+    nav: { home: 'Home', experience: 'Experience', skills: 'Skills', expertise: 'Expertise', about: 'About', projects: 'Projects', education: 'Education' },
+    hero: { subtitle: 'Full Stack Engineer & Data Manager', yearsAt: 'years at', downloadCv: '↓ Download CV' },
+    experience: { title: 'Experience', current: 'Current' },
+    skills: { title: 'Skills', runBtn: '▶ Run', running: '⟳ Running...', placeholder: '-- Click a table or write your SQL here\n-- Press Ctrl+Enter to execute', rowsReturned: 'rows returned', clickToExplore: 'Click a table to explore skills', tables: 'Tables', queryEditor: 'Query Editor', queryResult: 'Query Result' },
+    domain: { title: 'Domain Expertise' },
+    about: { title: 'Get to Know Me', live: 'Live', weekday: 'A typical weekday', weekend: 'Weekend mode', quickFacts: '⚡ Quick facts', askMe: '💬 Ask me about', sleeping: 'Sleeping' },
+    projects: { title: 'Projects' },
+    education: { title: 'Education' },
+    footer: '© 2026 Arnaud Boos',
+    wip: '🚧 This portfolio is a work in progress — crafted by Arnaud & AI',
+  },
+  fr: {
+    nav: { home: 'Accueil', experience: 'Expérience', skills: 'Compétences', expertise: 'Expertise', about: 'À propos', projects: 'Projets', education: 'Formation' },
+    hero: { subtitle: 'Ingénieur Full Stack & Responsable Données', yearsAt: 'ans chez', downloadCv: '↓ Télécharger CV' },
+    experience: { title: 'Expérience', current: 'En poste' },
+    skills: { title: 'Compétences', runBtn: '▶ Exécuter', running: '⟳ Exécution...', placeholder: '-- Cliquez sur une table ou écrivez votre requête SQL\n-- Appuyez sur Ctrl+Entrée pour exécuter', rowsReturned: 'lignes retournées', clickToExplore: 'Cliquez sur une table pour explorer', tables: 'Tables', queryEditor: 'Éditeur de requêtes', queryResult: 'Résultat' },
+    domain: { title: 'Expertise Métier' },
+    about: { title: 'Me Connaître', live: 'En direct', weekday: 'Journée type', weekend: 'Mode week-end', quickFacts: '⚡ En bref', askMe: '💬 Discutons de', sleeping: 'Dort' },
+    projects: { title: 'Projets' },
+    education: { title: 'Formation' },
+    footer: '© 2026 Arnaud Boos',
+    wip: '🚧 Ce portfolio est en cours de construction — créé par Arnaud & IA',
+  },
+};

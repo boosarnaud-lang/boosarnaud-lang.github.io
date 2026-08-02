@@ -1,3 +1,4 @@
+import { useLang } from '../context/LanguageContext';
 import './DomainExpertise.css';
 import { domainExpertise } from '../data/portfolio.js';
 
@@ -10,6 +11,7 @@ const TAGS = [
 ];
 
 export default function DomainExpertise() {
+  const { t } = useLang();
   const leftCards = domainExpertise.slice(0, 2);
   const rightCards = domainExpertise.slice(2, 4);
 
@@ -18,7 +20,7 @@ export default function DomainExpertise() {
       <div className="domain-glow domain-glow--amber"></div>
       <div className="domain-glow domain-glow--blue"></div>
 
-      <h2 className="domain-title">Domain Expertise</h2>
+      <h2 className="domain-title">{t.domain.title}</h2>
 
       <div className="domain-layout">
         {/* Left cards */}

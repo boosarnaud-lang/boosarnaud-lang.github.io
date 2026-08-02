@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLang } from '../context/LanguageContext';
 import './Skills.css';
 import { skills } from '../data/portfolio.js';
 
@@ -51,6 +52,7 @@ ORDER BY experience DESC;`,
 ];
 
 export default function Skills() {
+  const { t } = useLang();
   const [currentQuery, setCurrentQuery] = useState('');
   const [result, setResult] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
@@ -209,7 +211,7 @@ HAVING avg_confidence > 0.85;`}
 
       <div className="skills__content">
         <h2 className="skills__title">
-          <span className="skills__title-comment">// </span>Skills
+          <span className="skills__title-comment">// </span>{t.skills.title}
         </h2>
 
         <div className="skills__workspace">
@@ -217,7 +219,7 @@ HAVING avg_confidence > 0.85;`}
           <div className="skills__explorer">
             <div className="skills__explorer-header">
               <span className="skills__explorer-icon">⊞</span>
-              Tables
+              {t.skills.tables}
             </div>
             <ul className="skills__tables">
               {tables.map((table) => (
@@ -239,9 +241,9 @@ HAVING avg_confidence > 0.85;`}
             {/* Query editor */}
             <div className="skills__editor">
               <div className="skills__editor-header">
-                <span>Query Editor</span>
+                <span>{t.skills.queryEditor}</span>
                 <button className="skills__run-btn" onClick={handleRun} disabled={isRunning}>
-                  {isRunning ? '⟳ Running...' : '▶ Run'}
+                  {isRunning ? t.skills.running : t.skills.runBtn}
                 </button>
               </div>
               <textarea
@@ -249,7 +251,7 @@ HAVING avg_confidence > 0.85;`}
                 value={currentQuery}
                 onChange={(e) => setCurrentQuery(e.target.value)}
                 onKeyDown={handleKeyDown}
-                placeholder="-- Click a table or write your SQL here&#10;-- Press Ctrl+Enter to execute"
+                placeholder={t.skills.placeholder}
                 spellCheck={false}
               />
             </div>
@@ -259,7 +261,7 @@ HAVING avg_confidence > 0.85;`}
               <div className="skills__results-header">
                 {result && !result.error && (
                   <span className="skills__results-count">
-                    {result.rows.length} row{result.rows.length > 1 ? 's' : ''} returned
+                    {result.rows.length} {t.skills.rowsReturned}
                   </span>
                 )}
                 {isRunning && <span className="skills__results-loading">Executing...</span>}
@@ -294,7 +296,7 @@ HAVING avg_confidence > 0.85;`}
 
               {!result && !isRunning && (
                 <div className="skills__results-empty">
-                  Click a table to explore skills
+                  {t.skills.clickToExplore}
                 </div>
               )}
             </div>

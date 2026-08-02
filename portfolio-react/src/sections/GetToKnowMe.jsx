@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLang } from '../context/LanguageContext';
 import './GetToKnowMe.css';
 
 // Daily schedules
@@ -81,6 +82,7 @@ function getLocalTime() {
 }
 
 export default function GetToKnowMe() {
+  const { t } = useLang();
   const [currentHour, setCurrentHour] = useState(getCurrentHour());
   const [localTime, setLocalTime] = useState(getLocalTime());
   const schedule = getSchedule();
@@ -100,14 +102,14 @@ export default function GetToKnowMe() {
   return (
     <section id="about" className="about">
       <div className="about__content">
-        <h2 className="about__title">Get to Know Me</h2>
+        <h2 className="about__title">{t.about.title}</h2>
 
         <div className="about__grid">
           {/* Live status card */}
           <div className="about__card about__card--live">
             <div className="about__card-header">
               <span className="about__live-dot"></span>
-              Live — {localTime} (Schwindratzheim)
+              {t.about.live} — {localTime} (Schwindratzheim)
             </div>
             <div className="about__current-activity">
               {currentActivity ? (
@@ -118,7 +120,7 @@ export default function GetToKnowMe() {
               ) : (
                 <>
                   <span className="about__activity-icon">😴</span>
-                  <span className="about__activity-label">Sleeping</span>
+                  <span className="about__activity-label">{t.about.sleeping}</span>
                 </>
               )}
             </div>
@@ -126,7 +128,7 @@ export default function GetToKnowMe() {
 
           {/* Day timeline */}
           <div className="about__card about__card--timeline">
-            <div className="about__card-header">📅 {isWeekend ? 'Weekend mode' : 'A typical weekday'}</div>
+            <div className="about__card-header">📅 {isWeekend ? t.about.weekend : t.about.weekday}</div>
             <div className="about__timeline">
               {schedule.map((s) => {
                 const width = ((s.end - s.start) / 24) * 100;
@@ -156,7 +158,7 @@ export default function GetToKnowMe() {
 
           {/* Fun facts */}
           <div className="about__card about__card--facts">
-            <div className="about__card-header">⚡ Quick facts</div>
+            <div className="about__card-header">{t.about.quickFacts}</div>
             <div className="about__facts">
               {facts.map((f) => (
                 <div key={f.text} className="about__fact">
@@ -169,7 +171,7 @@ export default function GetToKnowMe() {
 
           {/* Ask me about */}
           <div className="about__card about__card--topics">
-            <div className="about__card-header">💬 Ask me about</div>
+            <div className="about__card-header">{t.about.askMe}</div>
             <div className="about__topics">
               {topics.map((t) => (
                 <span key={t} className="about__topic">{t}</span>

@@ -29,6 +29,24 @@
   transition: color 0.5s ease;
 }
 
+.nav-lang {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: 1.5px solid currentColor;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+  font-family: inherit;
+}
+
+.nav-lang:hover {
+  background: currentColor;
+  color: #fff;
+}
+
 .nav-links {
   display: flex;
   list-style: none;
@@ -87,6 +105,7 @@
 .nav[data-section="hero"] .nav-link { color: #1e293b; }
 .nav[data-section="hero"] .nav-link:hover { background: rgba(37, 99, 235, 0.1); }
 .nav[data-section="hero"] .nav-link.active { background: #2563eb; color: #fff; }
+.nav[data-section="hero"] .nav-lang:hover { background: #2563eb; color: #fff; }
 
 /* Experience — warm beige glass, terracotta */
 .nav[data-section="experience"] { background: rgba(255, 247, 237, 0.85); color: #451a03; }
@@ -95,6 +114,7 @@
 .nav[data-section="experience"] .nav-link { color: #451a03; }
 .nav[data-section="experience"] .nav-link:hover { background: rgba(180, 83, 9, 0.1); }
 .nav[data-section="experience"] .nav-link.active { background: #b45309; color: #fff; }
+.nav[data-section="experience"] .nav-lang:hover { background: #b45309; color: #fff; }
 
 /* Skills — navy glass, cyan */
 .nav[data-section="skills"] { background: rgba(15, 23, 42, 0.92); color: #e2e8f0; }
@@ -103,6 +123,7 @@
 .nav[data-section="skills"] .nav-link { color: #e2e8f0; }
 .nav[data-section="skills"] .nav-link:hover { background: rgba(34, 211, 238, 0.15); }
 .nav[data-section="skills"] .nav-link.active { background: #22d3ee; color: #0f172a; }
+.nav[data-section="skills"] .nav-lang:hover { background: #22d3ee; color: #0f172a; }
 
 /* Domain — dark glass, amber */
 .nav[data-section="domain"] { background: rgba(10, 14, 20, 0.92); color: #e2e8f0; }
@@ -111,6 +132,7 @@
 .nav[data-section="domain"] .nav-link { color: #e2e8f0; }
 .nav[data-section="domain"] .nav-link:hover { background: rgba(245, 158, 11, 0.15); }
 .nav[data-section="domain"] .nav-link.active { background: #f59e0b; color: #0a0e14; }
+.nav[data-section="domain"] .nav-lang:hover { background: #f59e0b; color: #0a0e14; }
 
 /* Projects — pink glass, purple */
 .nav[data-section="projects"] { background: rgba(253, 242, 248, 0.85); color: #1e1b4b; }
@@ -119,6 +141,7 @@
 .nav[data-section="projects"] .nav-link { color: #1e1b4b; }
 .nav[data-section="projects"] .nav-link:hover { background: rgba(168, 85, 247, 0.1); }
 .nav[data-section="projects"] .nav-link.active { background: #a855f7; color: #fff; }
+.nav[data-section="projects"] .nav-lang:hover { background: #a855f7; color: #fff; }
 
 /* About — dark red glass, coral */
 .nav[data-section="about"] { background: rgba(26, 10, 14, 0.92); color: #fce4ec; }
@@ -127,6 +150,7 @@
 .nav[data-section="about"] .nav-link { color: #fce4ec; }
 .nav[data-section="about"] .nav-link:hover { background: rgba(248, 113, 113, 0.15); }
 .nav[data-section="about"] .nav-link.active { background: #f87171; color: #1a0a0e; }
+.nav[data-section="about"] .nav-lang:hover { background: #f87171; color: #1a0a0e; }
 
 /* Education — mint glass, green */
 .nav[data-section="education"] { background: rgba(240, 253, 244, 0.85); color: #14532d; }
@@ -135,6 +159,7 @@
 .nav[data-section="education"] .nav-link { color: #14532d; }
 .nav[data-section="education"] .nav-link:hover { background: rgba(22, 163, 74, 0.1); }
 .nav[data-section="education"] .nav-link.active { background: #16a34a; color: #fff; }
+.nav[data-section="education"] .nav-lang:hover { background: #16a34a; color: #fff; }
 
 /* ===== RESPONSIVE — MOBILE ===== */
 

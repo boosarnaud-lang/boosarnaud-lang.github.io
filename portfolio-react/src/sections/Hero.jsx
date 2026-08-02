@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useLang } from '../context/LanguageContext';
 import './Hero.css';
 import { generateCV } from '../utils/generateCV';
 import { personal } from '../data/portfolio.js';
@@ -25,6 +26,7 @@ const roles = [
 ];
 
 export default function Hero() {
+  const { t } = useLang();
   const age = getAge();
   const yearsExp = getYearsExperience();
   const [roleIndex, setRoleIndex] = useState(0);
@@ -72,7 +74,7 @@ export default function Hero() {
         </p>
 
         <p className="hero__meta">
-          {age} yo · {yearsExp}+ years at <strong>{personal.company}</strong> ({personal.companyGroup} group) · {personal.location}
+          {age} yo · {yearsExp}+ {t.hero.yearsAt} <strong>{personal.company}</strong> ({personal.companyGroup} group) · {personal.location}
         </p>
 
         {/* Tech stack icons */}
@@ -106,7 +108,7 @@ export default function Hero() {
             ⟩ GitHub
           </a>
           <button onClick={generateCV} className="hero__link hero__link--cv">
-            ↓ Download CV
+            {t.hero.downloadCv}
           </button>
         </div>
       </div>

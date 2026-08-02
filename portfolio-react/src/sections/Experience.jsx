@@ -1,3 +1,4 @@
+import { useLang } from '../context/LanguageContext';
 import './Experience.css';
 import { experience } from '../data/portfolio.js';
 
@@ -8,6 +9,8 @@ function getDuration(startDate, endDate, current) {
 }
 
 export default function Experience() {
+  const { t } = useLang();
+  
   return (
     <section id="experience" className="experience">
       <div className="experience__blob experience__blob--1" />
@@ -15,7 +18,7 @@ export default function Experience() {
       <div className="experience__blob experience__blob--3" />
 
       <div className="experience__content">
-        <h2 className="experience__title">Experience</h2>
+        <h2 className="experience__title">{t.experience.title}</h2>
 
         <div className="experience__timeline">
           {experience.map((item, index) => (
@@ -24,7 +27,7 @@ export default function Experience() {
               <div className="experience__details">
                 <div className="experience__header">
                   <h3 className="experience__role">{item.title}</h3>
-                  {item.current && <span className="experience__badge">Current</span>}
+                  {item.current && <span className="experience__badge">{t.experience.current}</span>}
                 </div>
                 <p className="experience__company">
                   {item.company} · {item.period}

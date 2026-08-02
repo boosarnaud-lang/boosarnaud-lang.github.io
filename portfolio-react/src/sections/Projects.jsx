@@ -1,14 +1,17 @@
+import { useLang } from '../context/LanguageContext';
 import './Projects.css';
 import { projects } from '../data/portfolio.js';
 
 export default function Projects() {
+  const { t } = useLang();
+  
   return (
     <section id="projects" className="projects-section">
       <div className="projects-blob projects-blob--1"></div>
       <div className="projects-blob projects-blob--2"></div>
       <div className="projects-blob projects-blob--3"></div>
 
-      <h2 className="projects-title">Projects</h2>
+      <h2 className="projects-title">{t.projects.title}</h2>
 
       <div className="projects-grid">
         {projects.map((project) => (
