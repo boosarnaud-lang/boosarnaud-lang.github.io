@@ -7,42 +7,32 @@ const DUOLINGO_USERNAME = 'ArnaudBoos';
 
 function buildStaticTables(lang) {
   const skills = getSkills(lang);
-  return [
-    {
-      name: lang === 'fr' ? 'langues_parlees' : 'spoken_languages',
-      query: lang === 'fr'
-        ? `SELECT langue, niveau, details\nFROM langues_parlees\nORDER BY niveau DESC;`
-        : `SELECT language, level, details\nFROM spoken_languages\nORDER BY level DESC;`,
-      columns: lang === 'fr' ? ['langue', 'niveau', 'details'] : ['language', 'level', 'details'],
-      rows: lang === 'fr'
-        ? [['Français', 'natif', '—'], ['Anglais', 'courant', '—'], ['Japonais', 'en apprentissage', 'chargement...']]
-        : [['French', 'native', '—'], ['English', 'fluent', '—'], ['Japanese', 'learning', 'loading...']],
-    },
-    {
-      name: skills.languages.name || 'languages',
-      query: skills.languages.query,
-      columns: skills.languages.columns,
-      rows: skills.languages.rows,
-    },
-    {
-      name: skills.frameworks_tools.name || 'frameworks_tools',
-      query: skills.frameworks_tools.query,
-      columns: skills.frameworks_tools.columns,
-      rows: skills.frameworks_tools.rows,
-    },
-    {
-      name: skills.domain_expertise.name || 'domain_expertise',
-      query: skills.domain_expertise.query,
-      columns: skills.domain_expertise.columns,
-      rows: skills.domain_expertise.rows,
-    },
-    {
-      name: skills.other_skills.name || 'other_skills',
-      query: skills.other_skills.query,
-      columns: skills.other_skills.columns,
-      rows: skills.other_skills.rows,
-    },
-  ];
+
+  function getTableName(query) {
+    const match = query.match(/FROM\s+(\w+)/i);
+    return match ? match[1] : 'unknown';
+  }
+
+  const spokenLang = {
+    name: lang === 'fr' ? 'langues_parlees' : 'spoken_languages',
+    query: lang === 'fr'
+      ? `SELECT langue, niveau, details\nFROM langues_parlees\nORDER BY niveau DESC;`
+      : `SELECT language, level, details\nFROM spoken_languages\nORDER BY level DESC;`,
+    columns: lang === 'fr' ? ['langue', 'niveau', 'details'] : ['language', 'level', 'details'],
+    rows: lang === 'fr'
+      ? [['Français', 'natif', '—'], ['Anglais', 'courant', '—'], ['Japonais', 'en apprentissage', 'chargement...']]
+      : [['French', 'native', '—'], ['English', 'fluent', '—'], ['Japanese', 'learning', 'loading...']],
+  };
+
+  const entries = ['languages', 'frameworks_tools', 'domain_expertise', 'other_skills'];
+  const dataTables = entries.map((key) => ({
+    name: getTableName(skills[key].query),
+    query: skills[key].query,
+    columns: skills[key].columns,
+    rows: skills[key].rows,
+  }));
+
+  return [spokenLang, ...dataTables];
 }
 
 export default function Skills() {
@@ -76,62 +66,64 @@ export default function Skills() {
           const details = `🔥 ${streak} day streak · ${xp.toLocaleString()} XP (via Duolingo)`;
 
           setTables((prev) =>
-            prev.map((t) => {
-              if (t.name === 'spoken_languages') {
+            prev.map((tbl) => {
+              if (tbl.name === 'spoken_languages' || tbl.name === 'langues_parlees') {
                 return {
-                  ...t,
-                  rows: t.rows.map((row) =>
-                    row[0] === 'Japanese' ? ['Japanese', 'learning', details] : row
+                  ...tbl,
+                  rows: tbl.rows.map((row) =>
+                    (row[0] === 'Japanese' || row[0] === 'Japonais') ? [row[0], row[1], details] : row
                   ),
                 };
               }
-              return t;
+              return tbl;
             })
           );
         }
       })
       .catch(() => {
-        // Fallback if API fails
         setTables((prev) =>
-          prev.map((t) => {
-            if (t.name === 'spoken_languages') {
+          prev.map((tbl) => {
+            if (tbl.name === 'spoken_languages' || tbl.name === 'langues_parlees') {
               return {
-                ...t,
-                rows: t.rows.map((row) =>
-                  row[0] === 'Japanese' ? ['Japanese', 'learning', 'Duolingo'] : row
+                ...tbl,
+                rows: tbl.rows.map((row) =>
+                  (row[0] === 'Japanese' || row[0] === 'Japonais') ? [row[0], row[1], 'Duolingo'] : row
                 ),
               };
             }
-            return t;
+            return tbl;
           })
         );
       })
       .finally(() => clearTimeout(timeoutId));
-  }, []);
+  }, [lang]);
 
   const runQuery = (query) => {
     setCurrentQuery(query);
     setIsRunning(true);
     setResult(null);
 
-    // Simulate execution delay
+    // Simulate execution delay — use latest tables via setTables callback to read current state
     setTimeout(() => {
-      const table = tables.find((t) => query.includes(`FROM ${t.name}`));
-      if (table) {
-        setResult(table);
-      } else {
-        setResult({ error: `Table not found. Available tables: ${tables.map(t => t.name).join(', ')}` });
-      }
-      setIsRunning(false);
+      setTables((currentTables) => {
+        const table = currentTables.find((tbl) => query.includes(`FROM ${tbl.name}`));
+        if (table) {
+          setResult(table);
+        } else {
+          setResult({ error: `Table not found. Available: ${currentTables.map(tbl => tbl.name).join(', ')}` });
+        }
+        setIsRunning(false);
+        return currentTables; // don't mutate
+      });
     }, 600);
   };
 
-  // Auto-run first query on mount (use 'languages' which has no async dependency)
+  // Auto-run first query when tables change (mount + language switch)
   useEffect(() => {
-    if (tables.length > 1 && !result) {
+    if (tables.length > 1) {
       runQuery(tables[1].query);
     }
-  }, []);
+  }, [lang]);
 
   // Sync result when tables update (e.g., Duolingo data arrives)
   useEffect(() => {
