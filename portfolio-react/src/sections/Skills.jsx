@@ -86,7 +86,7 @@ export default function Skills() {
           const streak = user.streak || 0;
           const jaCourse = user.courses?.find((c) => c.learningLanguage === 'ja');
           const xp = jaCourse ? jaCourse.xp : user.totalXp;
-          const details = `🔥 ${streak} day streak · ${xp.toLocaleString()} XP`;
+          const details = `🔥 ${streak} day streak · ${xp.toLocaleString()} XP (via Duolingo)`;
 
           setTables((prev) =>
             prev.map((t) => {
