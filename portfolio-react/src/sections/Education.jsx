@@ -1,9 +1,10 @@
 import { useLang } from '../context/LanguageContext';
 import './Education.css';
-import { education } from '../data/portfolio.js';
+import { getEducation } from '../data/portfolio.js';
 
 export default function Education() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const education = getEducation(lang);
   
   return (
     <section id="education" className="education-section">

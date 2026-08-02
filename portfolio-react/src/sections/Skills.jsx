@@ -1,62 +1,63 @@
 import { useState, useEffect } from 'react';
 import { useLang } from '../context/LanguageContext';
 import './Skills.css';
-import { skills } from '../data/portfolio.js';
+import { getSkills } from '../data/portfolio.js';
 
 const DUOLINGO_USERNAME = 'ArnaudBoos';
 
-const staticTables = [
-  {
-    name: 'spoken_languages',
-    query: `SELECT language, level, details
-FROM spoken_languages
-ORDER BY level DESC;`,
-    columns: ['language', 'level', 'details'],
-    rows: [
-      ['French', 'native', '—'],
-      ['English', 'fluent', '—'],
-      ['Japanese', 'learning', 'loading...'],
-    ],
-  },
-  {
-    name: 'languages',
-    query: `SELECT name, level, years_exp
-FROM languages
-ORDER BY years_exp DESC;`,
-    columns: skills.languages.columns,
-    rows: skills.languages.rows,
-  },
-  {
-    name: 'frameworks_tools',
-    query: `SELECT name, category, daily_use
-FROM frameworks_tools
-ORDER BY category;`,
-    columns: skills.frameworks_tools.columns,
-    rows: skills.frameworks_tools.rows,
-  },
-  {
-    name: 'domain_expertise',
-    query: `SELECT domain, specialization, depth
-FROM domain_expertise;`,
-    columns: skills.domain_expertise.columns,
-    rows: skills.domain_expertise.rows,
-  },
-  {
-    name: 'other_skills',
-    query: `SELECT skill, tools, experience
-FROM other_skills
-ORDER BY experience DESC;`,
-    columns: skills.other_skills.columns,
-    rows: skills.other_skills.rows,
-  },
-];
+function buildStaticTables(lang) {
+  const skills = getSkills(lang);
+  return [
+    {
+      name: lang === 'fr' ? 'langues_parlees' : 'spoken_languages',
+      query: lang === 'fr'
+        ? `SELECT langue, niveau, details\nFROM langues_parlees\nORDER BY niveau DESC;`
+        : `SELECT language, level, details\nFROM spoken_languages\nORDER BY level DESC;`,
+      columns: lang === 'fr' ? ['langue', 'niveau', 'details'] : ['language', 'level', 'details'],
+      rows: lang === 'fr'
+        ? [['Français', 'natif', '—'], ['Anglais', 'courant', '—'], ['Japonais', 'en apprentissage', 'chargement...']]
+        : [['French', 'native', '—'], ['English', 'fluent', '—'], ['Japanese', 'learning', 'loading...']],
+    },
+    {
+      name: skills.languages.name || 'languages',
+      query: skills.languages.query,
+      columns: skills.languages.columns,
+      rows: skills.languages.rows,
+    },
+    {
+      name: skills.frameworks_tools.name || 'frameworks_tools',
+      query: skills.frameworks_tools.query,
+      columns: skills.frameworks_tools.columns,
+      rows: skills.frameworks_tools.rows,
+    },
+    {
+      name: skills.domain_expertise.name || 'domain_expertise',
+      query: skills.domain_expertise.query,
+      columns: skills.domain_expertise.columns,
+      rows: skills.domain_expertise.rows,
+    },
+    {
+      name: skills.other_skills.name || 'other_skills',
+      query: skills.other_skills.query,
+      columns: skills.other_skills.columns,
+      rows: skills.other_skills.rows,
+    },
+  ];
+}
 
 export default function Skills() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
   const [currentQuery, setCurrentQuery] = useState('');
   const [result, setResult] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
-  const [tables, setTables] = useState(staticTables);
+  const [tables, setTables] = useState(() => buildStaticTables(lang));
+
+  // Rebuild tables when language changes
+  useEffect(() => {
+    setTables(buildStaticTables(lang));
+    setResult(null);
+    setCurrentQuery('');
+  }, [lang]);
 
   // Fetch Duolingo stats
   useEffect(() => {

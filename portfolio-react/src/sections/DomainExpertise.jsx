@@ -1,6 +1,6 @@
 import { useLang } from '../context/LanguageContext';
 import './DomainExpertise.css';
-import { domainExpertise } from '../data/portfolio.js';
+import { getDomainExpertise } from '../data/portfolio.js';
 
 const ICONS = ['🔍', '⚙️', '🔗', '📊'];
 const TAGS = [
@@ -11,7 +11,8 @@ const TAGS = [
 ];
 
 export default function DomainExpertise() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const domainExpertise = getDomainExpertise(lang);
   const leftCards = domainExpertise.slice(0, 2);
   const rightCards = domainExpertise.slice(2, 4);
 

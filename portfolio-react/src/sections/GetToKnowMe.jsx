@@ -3,27 +3,31 @@ import { useLang } from '../context/LanguageContext';
 import './GetToKnowMe.css';
 
 // Daily schedules
-const weekdaySchedule = [
-  { start: 0, end: 7.5, label: 'Sleeping', icon: '😴' },
-  { start: 7.5, end: 8, label: 'Wake up', icon: '☀️' },
-  { start: 8, end: 9, label: 'Dog walk', icon: '🐕' },
-  { start: 9, end: 12, label: 'Work — coding & data', icon: '💻' },
-  { start: 12, end: 12.5, label: 'Lunch', icon: '🍽️' },
-  { start: 12.5, end: 18, label: 'Work — deep focus', icon: '⚡' },
-  { start: 18, end: 22, label: 'Family, sport, reading', icon: '🏡' },
-  { start: 22, end: 24, label: 'Geeking', icon: '🎮' },
-];
+function getWeekdaySchedule(t) {
+  return [
+    { start: 0, end: 7.5, label: t.about.sleeping, icon: '😴' },
+    { start: 7.5, end: 8, label: t.about.schedule.wakeUp, icon: '☀️' },
+    { start: 8, end: 9, label: t.about.schedule.dogWalk, icon: '🐕' },
+    { start: 9, end: 12, label: t.about.schedule.workCoding, icon: '💻' },
+    { start: 12, end: 12.5, label: t.about.schedule.lunch, icon: '🍽️' },
+    { start: 12.5, end: 18, label: t.about.schedule.workDeep, icon: '⚡' },
+    { start: 18, end: 22, label: t.about.schedule.family, icon: '🏡' },
+    { start: 22, end: 24, label: t.about.schedule.geeking, icon: '🎮' },
+  ];
+}
 
-const weekendSchedule = [
-  { start: 0, end: 7.5, label: 'Sleeping', icon: '😴' },
-  { start: 7.5, end: 8, label: 'Wake up', icon: '☀️' },
-  { start: 8, end: 9, label: 'Dog walk', icon: '🐕' },
-  { start: 9, end: 24, label: 'Charging batteries', icon: '🔋' },
-];
+function getWeekendSchedule(t) {
+  return [
+    { start: 0, end: 7.5, label: t.about.sleeping, icon: '😴' },
+    { start: 7.5, end: 8, label: t.about.schedule.wakeUp, icon: '☀️' },
+    { start: 8, end: 9, label: t.about.schedule.dogWalk, icon: '🐕' },
+    { start: 9, end: 24, label: t.about.schedule.charging, icon: '🔋' },
+  ];
+}
 
-function getSchedule() {
+function getSchedule(t) {
   const day = new Date().getDay();
-  return (day === 0 || day === 6) ? weekendSchedule : weekdaySchedule;
+  return (day === 0 || day === 6) ? getWeekendSchedule(t) : getWeekdaySchedule(t);
 }
 
 // Dynamic dates
@@ -47,31 +51,6 @@ function getMarriageDuration() {
   return `${adjusted}+ years`;
 }
 
-// Fun facts
-const facts = [
-  { icon: '💍', text: `Married since Feb 2022 (${getMarriageDuration()})` },
-  { icon: '🐕', text: `Golden Retriever (${getDogAge()})` },
-  { icon: '🍫', text: 'Ice chocolate in summer, hot chocolate in winter' },
-  { icon: '🦉', text: 'Night owl — best ideas after 22h' },
-  { icon: '🎮', text: 'Gamer — after hours ritual' },
-  { icon: '⚽', text: 'Football, cycling, padel' },
-  { icon: '🎸', text: 'Music = rock mostly, listens to everything' },
-  { icon: '📚', text: 'Dune (book 4), WoT ✓, HP ✓, Witcher ✓' },
-  { icon: '🖥️', text: 'Kiro on Linux (WSL)' },
-];
-
-// Ask me about
-const topics = [
-  'Data lifecycle',
-  'Gaming',
-  'Future projects',
-  'Life in general',
-  'Psychology',
-  'Dogs',
-  'Books',
-  'Sports',
-];
-
 function getCurrentHour() {
   const now = new Date();
   return now.getHours() + now.getMinutes() / 60;
@@ -81,11 +60,28 @@ function getLocalTime() {
   return new Date().toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Paris' });
 }
 
+// Fun facts
+function getFacts(t) {
+  return [
+    { icon: '💍', text: `${t.about.facts.married} (${getMarriageDuration()})` },
+    { icon: '🐕', text: `${t.about.facts.dog} (${getDogAge()})` },
+    { icon: '🍫', text: t.about.facts.chocolate },
+    { icon: '🦉', text: t.about.facts.nightOwl },
+    { icon: '🎮', text: t.about.facts.gamer },
+    { icon: '⚽', text: t.about.facts.sports },
+    { icon: '🎸', text: t.about.facts.music },
+    { icon: '📚', text: t.about.facts.books },
+    { icon: '🖥️', text: t.about.facts.editor },
+  ];
+}
+
 export default function GetToKnowMe() {
   const { t } = useLang();
   const [currentHour, setCurrentHour] = useState(getCurrentHour());
   const [localTime, setLocalTime] = useState(getLocalTime());
-  const schedule = getSchedule();
+  const schedule = getSchedule(t);
+  const facts = getFacts(t);
+  const topics = t.about.topics;
 
   useEffect(() => {
     const interval = setInterval(() => {

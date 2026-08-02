@@ -1,15 +1,16 @@
 import { useLang } from '../context/LanguageContext';
 import './Experience.css';
-import { experience } from '../data/portfolio.js';
+import { getExperience } from '../data/portfolio.js';
 
 function getDuration(startDate, endDate, current) {
   const end = current ? new Date() : endDate;
   const years = Math.floor((end - startDate) / (365.25 * 24 * 60 * 60 * 1000));
-  return years > 0 ? `${years}+ years` : '< 1 year';
+  return years > 0 ? `${years}+` : '< 1';
 }
 
 export default function Experience() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const experience = getExperience(lang);
   
   return (
     <section id="experience" className="experience">
@@ -31,7 +32,7 @@ export default function Experience() {
                 </div>
                 <p className="experience__company">
                   {item.company} · {item.period}
-                  <span className="experience__duration"> ({getDuration(item.startDate, item.endDate, item.current)})</span>
+                  <span className="experience__duration"> ({getDuration(item.startDate, item.endDate, item.current)} {lang === 'fr' ? 'ans' : 'years'})</span>
                 </p>
 
                 {item.achievements && item.achievements.length > 0 && (

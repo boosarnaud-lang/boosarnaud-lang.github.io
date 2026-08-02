@@ -1,9 +1,10 @@
 import { useLang } from '../context/LanguageContext';
 import './Projects.css';
-import { projects } from '../data/portfolio.js';
+import { getProjects } from '../data/portfolio.js';
 
 export default function Projects() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
+  const projects = getProjects(lang);
   
   return (
     <section id="projects" className="projects-section">
