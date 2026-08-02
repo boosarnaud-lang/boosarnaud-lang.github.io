@@ -120,6 +120,14 @@
 .nav[data-section="projects"] .nav-link:hover { background: rgba(168, 85, 247, 0.1); }
 .nav[data-section="projects"] .nav-link.active { background: #a855f7; color: #fff; }
 
+/* About — dark red glass, coral */
+.nav[data-section="about"] { background: rgba(26, 10, 14, 0.92); color: #fce4ec; }
+.nav[data-section="about"] .nav-logo { color: #f87171; }
+.nav[data-section="about"] .nav-burger__line { background: #f87171; }
+.nav[data-section="about"] .nav-link { color: #fce4ec; }
+.nav[data-section="about"] .nav-link:hover { background: rgba(248, 113, 113, 0.15); }
+.nav[data-section="about"] .nav-link.active { background: #f87171; color: #1a0a0e; }
+
 /* Education — mint glass, green */
 .nav[data-section="education"] { background: rgba(240, 253, 244, 0.85); color: #14532d; }
 .nav[data-section="education"] .nav-logo { color: #16a34a; }
@@ -154,6 +162,7 @@
   .nav[data-section="experience"] .nav-links { background: rgba(255, 247, 237, 0.97); }
   .nav[data-section="skills"] .nav-links { background: rgba(15, 23, 42, 0.97); }
   .nav[data-section="domain"] .nav-links { background: rgba(10, 14, 20, 0.97); }
+  .nav[data-section="about"] .nav-links { background: rgba(26, 10, 14, 0.97); }
   .nav[data-section="projects"] .nav-links { background: rgba(253, 242, 248, 0.97); }
   .nav[data-section="education"] .nav-links { background: rgba(240, 253, 244, 0.97); }
 
