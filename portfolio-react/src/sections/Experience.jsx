@@ -1,6 +1,12 @@
 import './Experience.css';
 import { experience } from '../data/portfolio.js';
 
+function getDuration(startDate, endDate, current) {
+  const end = current ? new Date() : endDate;
+  const years = Math.floor((end - startDate) / (365.25 * 24 * 60 * 60 * 1000));
+  return years > 0 ? `${years}+ years` : '< 1 year';
+}
+
 export default function Experience() {
   return (
     <section id="experience" className="experience">
@@ -13,13 +19,26 @@ export default function Experience() {
 
         <div className="experience__timeline">
           {experience.map((item, index) => (
-            <div key={index} className="experience__item">
-              <div className="experience__dot" />
+            <div key={index} className={`experience__item ${item.highlight ? 'experience__item--highlight' : ''}`}>
+              <div className={`experience__dot ${item.current ? 'experience__dot--active' : ''}`} />
               <div className="experience__details">
-                <h3 className="experience__role">{item.title}</h3>
+                <div className="experience__header">
+                  <h3 className="experience__role">{item.title}</h3>
+                  {item.current && <span className="experience__badge">Current</span>}
+                </div>
                 <p className="experience__company">
                   {item.company} · {item.period}
+                  <span className="experience__duration"> ({getDuration(item.startDate, item.endDate, item.current)})</span>
                 </p>
+
+                {item.achievements && item.achievements.length > 0 && (
+                  <ul className="experience__achievements">
+                    {item.achievements.map((a, i) => (
+                      <li key={i}>{a}</li>
+                    ))}
+                  </ul>
+                )}
+
                 {item.skills.length > 0 && (
                   <div className="experience__skills">
                     {item.skills.map((skill) => (
