@@ -128,7 +128,7 @@ export default function Skills() {
 
     // Simulate execution delay
     setTimeout(() => {
-      const table = tables.find((t) => query.includes(t.name));
+      const table = tables.find((t) => query.includes(`FROM ${t.name}`));
       if (table) {
         setResult(table);
       } else {
@@ -223,7 +223,7 @@ HAVING avg_confidence > 0.85;`}
               {tables.map((table) => (
                 <li
                   key={table.name}
-                  className={`skills__table-item ${currentQuery.includes(table.name) ? 'active' : ''}`}
+                  className={`skills__table-item ${currentQuery.includes(`FROM ${table.name}`) ? 'active' : ''}`}
                   onClick={() => handleTableClick(table)}
                 >
                   <span className="skills__table-icon">⊟</span>
