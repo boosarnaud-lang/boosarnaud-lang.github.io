@@ -58,7 +58,11 @@ export default function Skills() {
 
   // Fetch Duolingo stats
   useEffect(() => {
-    fetch(`https://www.duolingo.com/2017-06-30/users?username=${DUOLINGO_USERNAME}`)
+    const controller = new AbortController();
+    const timeoutId = setTimeout(() => controller.abort(), 5000);
+    const url = `https://corsproxy.io/?url=${encodeURIComponent(`https://www.duolingo.com/2017-06-30/users?username=${DUOLINGO_USERNAME}`)}`;
+
+    fetch(url, { signal: controller.signal })
       .then((res) => res.json())
       .then((data) => {
         if (data.users && data.users[0]) {
@@ -98,7 +102,8 @@ export default function Skills() {
             return t;
           })
         );
-      });
+      })
+      .finally(() => clearTimeout(timeoutId));
   }, []);
 
   const runQuery = (query) => {
@@ -117,6 +122,13 @@ export default function Skills() {
       setIsRunning(false);
     }, 600);
   };
+
+  // Auto-run first query on mount
+  useEffect(() => {
+    if (tables.length > 0 && !result) {
+      runQuery(tables[0].query);
+    }
+  }, [tables]);
 
   const handleTableClick = (table) => {
     runQuery(table.query);
