@@ -1,4 +1,5 @@
 import { jsPDF } from 'jspdf';
+import { personal, experience, skills, domainExpertise, projects, education } from '../data/portfolio.js';
 
 // Dark green modern theme colors
 const COLORS = {
@@ -11,8 +12,7 @@ const COLORS = {
 };
 
 function getYearsExp() {
-  const start = new Date(2012, 6);
-  const diff = Date.now() - start.getTime();
+  const diff = Date.now() - personal.careerStart.getTime();
   return Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
 }
 
@@ -37,20 +37,20 @@ export function generateCV() {
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
   doc.setTextColor(...COLORS.text);
-  doc.text('Arnaud Boos', margin, y);
+  doc.text(personal.name, margin, y);
 
   // Subtitle
   y += 8;
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(11);
   doc.setTextColor(...COLORS.accent);
-  doc.text('Full Stack Engineer & Data Manager', margin, y);
+  doc.text(personal.title, margin, y);
 
   // Meta
   y += 7;
   doc.setFontSize(8.5);
   doc.setTextColor(...COLORS.textDim);
-  doc.text(`${getYearsExp()}+ years at Catdata · Schwindratzheim, France · boosarnaud@gmail.com · linkedin.com/in/arnaud-boos-28a3a67b`, margin, y);
+  doc.text(`${getYearsExp()}+ years at ${personal.company} · ${personal.location} · ${personal.email} · ${personal.linkedin.replace('https://www.', '')}`, margin, y);
 
   // Accent bar under header
   y = 45;
@@ -98,31 +98,23 @@ export function generateCV() {
   // === EXPERIENCE ===
   sectionTitle('Experience');
 
-  jobEntry('Full Stack Engineer & Data Manager', 'Catdata (TecAlliance group since 2023)', `July 2012 — Present (${getYearsExp()}+ years)`, [
-    'Full Stack Development (TypeScript, Go, PHP, React, Node.js)',
-    'Automotive Data: VIN/Plate identification, OEM & IAM catalogs, TecAlliance',
-    'Data pipeline architecture, ETL processes, and quality assurance',
-    'Project Management & Technical Consulting',
-    'Reverse Engineering of proprietary data formats and protocols',
-    'AI Agents development (Kiro, Cursor, LLM tooling)',
-  ]);
+  const exp0 = experience[0];
+  jobEntry(exp0.title, `${exp0.company} since ${personal.companyGroupSince}`, `July 2012 — Present (${getYearsExp()}+ years)`, exp0.details);
 
-  jobEntry('Director', 'Catdata', 'June 2017 — April 2022 (5 years)', [
-    'Company operations, strategy, and client relationships',
-  ]);
+  const exp1 = experience[1];
+  jobEntry(exp1.title, exp1.company, 'June 2017 — April 2022 (5 years)', exp1.details);
 
-  jobEntry('IT Technician — Intern', 'Catdata', 'April — June 2012', [
-    'Requirements documentation and web programming',
-  ]);
+  const exp2 = experience[2];
+  jobEntry(exp2.title, exp2.company, 'April — June 2012', exp2.details);
 
   // === SKILLS ===
   sectionTitle('Skills');
 
   const skillGroups = [
-    ['Languages', 'TypeScript · Go · PHP · SQL'],
-    ['Frameworks & Tools', 'React · Node.js · Docker · Git · REST APIs'],
-    ['Domain', 'Automotive Data · VIN/Plate · TecAlliance · OEM/IAM Catalogs'],
-    ['Other', 'AI Agents · Data Management · Reverse Engineering · Project Management'],
+    ['Languages', skills.languages.items.join(' · ')],
+    ['Frameworks & Tools', skills.frameworks_tools.items.join(' · ')],
+    ['Domain', skills.domain_expertise.items.join(' · ')],
+    ['Other', skills.other_skills.items.join(' · ')],
   ];
 
   const colW = contentW / 2;
@@ -150,12 +142,7 @@ export function generateCV() {
   // === DOMAIN EXPERTISE ===
   sectionTitle('Domain Expertise — Automotive Data');
 
-  const domains = [
-    ['Vehicle Identification', 'VIN decoding, plate resolution, WMI/VDS/VIS'],
-    ['OEM & IAM Catalogs', 'Parts cross-referencing, data mapping'],
-    ['TecAlliance Ecosystem', 'TecDoc, TecCom, data standardization'],
-    ['Data Management', 'ETL pipelines, reverse engineering, QA'],
-  ];
+  const domains = domainExpertise.map((d) => [d.title, d.desc]);
 
   const domStartY = y;
   domains.forEach((d, i) => {
@@ -180,45 +167,48 @@ export function generateCV() {
   // === PROJECTS ===
   sectionTitle('Projects');
 
+  const proj = projects[0];
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9.5);
   doc.setTextColor(...COLORS.text);
-  doc.text('Krate', margin, y);
+  doc.text(proj.name, margin, y);
   doc.setFont('helvetica', 'normal');
   doc.setTextColor(...COLORS.textDim);
-  doc.text(' — Personal Project Manager', margin + doc.getTextWidth('Krate '), y);
+  doc.text(` — ${proj.description.split(' with ')[0].replace('Personal project manager', 'Personal Project Manager')}`, margin + doc.getTextWidth(`${proj.name} `), y);
   y += 4.5;
   doc.setFontSize(8.5);
   doc.setTextColor(...COLORS.text);
-  doc.text('•  Kanban boards, task tracking, git integration (React, TypeScript, Express, Docker)', margin + 3, y);
+  doc.text(`•  Kanban boards, task tracking, git integration (${proj.tech.join(', ')})`, margin + 3, y);
   y += 6;
 
   // === EDUCATION ===
   sectionTitle('Education');
 
+  const edu0 = education[0];
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
   doc.setTextColor(...COLORS.text);
-  doc.text('DUT Informatique (Computer Science)', margin, y);
+  doc.text(edu0.degree, margin, y);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(...COLORS.textDim);
-  doc.text('IUT Robert Schuman · 2010 — 2012', margin, y + 4.2);
+  doc.text(`${edu0.school} · ${edu0.period}`, margin, y + 4.2);
   y += 12;
 
+  const edu1 = education[1];
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(9);
   doc.setTextColor(...COLORS.text);
-  doc.text('Baccalauréat Scientifique', margin, y);
+  doc.text(edu1.degree, margin, y);
   doc.setFont('helvetica', 'normal');
   doc.setFontSize(8);
   doc.setTextColor(...COLORS.textDim);
-  doc.text('Lycée Leclerc · 2007 — 2010', margin, y + 4.2);
+  doc.text(`${edu1.school} · ${edu1.period}`, margin, y + 4.2);
 
   // Footer accent line
   doc.setFillColor(...COLORS.accent);
   doc.rect(0, H - 3, W, 3, 'F');
 
   // Save
-  doc.save('Arnaud_Boos_CV.pdf');
+  doc.save(`${personal.name.replace(' ', '_')}_CV.pdf`);
 }

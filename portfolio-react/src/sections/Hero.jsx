@@ -1,23 +1,19 @@
 import { useState, useEffect } from 'react';
 import './Hero.css';
 import { generateCV } from '../utils/generateCV';
-
-// Dynamic calculations
-const BIRTH_YEAR = 1992;
-const BIRTH_MONTH = 1; // TODO: update with actual birth month
-const CAREER_START = new Date(2012, 6); // July 2012
+import { personal } from '../data/portfolio.js';
 
 function getAge() {
   const today = new Date();
-  let age = today.getFullYear() - BIRTH_YEAR;
-  const monthDiff = today.getMonth() + 1 - BIRTH_MONTH;
+  let age = today.getFullYear() - personal.birthYear;
+  const monthDiff = today.getMonth() + 1 - personal.birthMonth;
   if (monthDiff < 0) age--;
   return age;
 }
 
 function getYearsExperience() {
   const today = new Date();
-  const diff = today - CAREER_START;
+  const diff = today - personal.careerStart;
   return Math.floor(diff / (365.25 * 24 * 60 * 60 * 1000));
 }
 
@@ -67,7 +63,7 @@ export default function Hero() {
           <span className="hero__avatar-initials">AB</span>
         </div>
 
-        <h1 className="hero__name">Arnaud Boos</h1>
+        <h1 className="hero__name">{personal.name}</h1>
 
         {/* Typing animation */}
         <p className="hero__role">
@@ -76,7 +72,7 @@ export default function Hero() {
         </p>
 
         <p className="hero__meta">
-          {age} yo · {yearsExp}+ years at <strong>Catdata</strong> (TecAlliance group) · Schwindratzheim, France
+          {age} yo · {yearsExp}+ years at <strong>{personal.company}</strong> ({personal.companyGroup} group) · {personal.location}
         </p>
 
         {/* Tech stack icons */}
@@ -90,11 +86,11 @@ export default function Hero() {
         </div>
 
         <div className="hero__links">
-          <a href="mailto:boosarnaud@gmail.com" className="hero__link">
+          <a href={`mailto:${personal.email}`} className="hero__link">
             ✉ Email
           </a>
           <a
-            href="https://www.linkedin.com/in/arnaud-boos-28a3a67b/"
+            href={personal.linkedin}
             target="_blank"
             rel="noopener noreferrer"
             className="hero__link"
@@ -102,7 +98,7 @@ export default function Hero() {
             ⌘ LinkedIn
           </a>
           <a
-            href="https://github.com/boosarnaud-lang"
+            href={personal.github}
             target="_blank"
             rel="noopener noreferrer"
             className="hero__link"

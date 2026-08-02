@@ -1,4 +1,5 @@
 import './Education.css';
+import { education } from '../data/portfolio.js';
 
 export default function Education() {
   return (
@@ -14,23 +15,16 @@ export default function Education() {
       <h2 className="education-title">Education</h2>
 
       <div className="education-timeline">
-        <div className="education-card">
-          <div className="education-card__accent"></div>
-          <div className="education-card__content">
-            <h3 className="education-card__degree">DUT Informatique</h3>
-            <p className="education-card__school">IUT Robert Schuman</p>
-            <span className="education-card__year">2010 – 2012</span>
+        {education.map((edu) => (
+          <div key={edu.degree} className="education-card">
+            <div className="education-card__accent"></div>
+            <div className="education-card__content">
+              <h3 className="education-card__degree">{edu.degree}</h3>
+              <p className="education-card__school">{edu.school}</p>
+              <span className="education-card__year">{edu.period}</span>
+            </div>
           </div>
-        </div>
-
-        <div className="education-card">
-          <div className="education-card__accent"></div>
-          <div className="education-card__content">
-            <h3 className="education-card__degree">Baccalauréat Scientifique</h3>
-            <p className="education-card__school">Lycée Leclerc</p>
-            <span className="education-card__year">2007 – 2010</span>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );

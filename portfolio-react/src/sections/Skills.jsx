@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import './Skills.css';
+import { skills } from '../data/portfolio.js';
 
 const DUOLINGO_USERNAME = 'ArnaudBoos';
 
@@ -21,52 +22,31 @@ ORDER BY level DESC;`,
     query: `SELECT name, level, years_exp
 FROM languages
 ORDER BY years_exp DESC;`,
-    columns: ['name', 'level', 'years_exp'],
-    rows: [
-      ['PHP', 'expert', '14'],
-      ['SQL', 'advanced', '14'],
-      ['TypeScript', 'expert', '8'],
-      ['Go', 'advanced', '4'],
-    ],
+    columns: skills.languages.columns,
+    rows: skills.languages.rows,
   },
   {
     name: 'frameworks_tools',
     query: `SELECT name, category, daily_use
 FROM frameworks_tools
 ORDER BY category;`,
-    columns: ['name', 'category', 'daily_use'],
-    rows: [
-      ['React', 'framework', 'true'],
-      ['Node.js', 'runtime', 'true'],
-      ['Docker', 'devops', 'true'],
-      ['Git', 'vcs', 'true'],
-      ['REST APIs', 'architecture', 'true'],
-    ],
+    columns: skills.frameworks_tools.columns,
+    rows: skills.frameworks_tools.rows,
   },
   {
     name: 'domain_expertise',
     query: `SELECT domain, specialization, depth
 FROM domain_expertise;`,
-    columns: ['domain', 'specialization', 'depth'],
-    rows: [
-      ['Automotive Data', 'vehicle ecosystems', 'expert'],
-      ['VIN/Plate ID', 'decoding & resolution', 'expert'],
-      ['TecAlliance', 'TecDoc, TecCom', 'expert'],
-      ['OEM & IAM Catalogs', 'cross-referencing', 'expert'],
-    ],
+    columns: skills.domain_expertise.columns,
+    rows: skills.domain_expertise.rows,
   },
   {
     name: 'other_skills',
     query: `SELECT skill, tools, experience
 FROM other_skills
 ORDER BY experience DESC;`,
-    columns: ['skill', 'tools', 'experience'],
-    rows: [
-      ['AI Agents', 'Kiro, Cursor, Claude', 'active'],
-      ['Data Management', 'ETL, pipelines', '14 years'],
-      ['Reverse Engineering', 'protocols, formats', '10 years'],
-      ['Project Management', 'consulting', '8 years'],
-    ],
+    columns: skills.other_skills.columns,
+    rows: skills.other_skills.rows,
   },
 ];
 

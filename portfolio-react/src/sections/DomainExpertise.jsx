@@ -1,6 +1,18 @@
 import './DomainExpertise.css';
+import { domainExpertise } from '../data/portfolio.js';
+
+const ICONS = ['🔍', '⚙️', '🔗', '📊'];
+const TAGS = [
+  ['VIN', 'Plates', 'WMI'],
+  ['OEM', 'IAM', 'Cross-ref'],
+  ['TecDoc', 'TecCom', 'Standards'],
+  ['ETL', 'Rev. Eng.', 'QA'],
+];
 
 export default function DomainExpertise() {
+  const leftCards = domainExpertise.slice(0, 2);
+  const rightCards = domainExpertise.slice(2, 4);
+
   return (
     <section id="domain" className="domain-section">
       <div className="domain-glow domain-glow--amber"></div>
@@ -11,25 +23,17 @@ export default function DomainExpertise() {
       <div className="domain-layout">
         {/* Left cards */}
         <div className="domain-cards domain-cards--left">
-          <div className="domain-card">
-            <span className="domain-card__icon">🔍</span>
-            <h3 className="domain-card__title">Vehicle Identification</h3>
-            <p className="domain-card__desc">VIN decoding, plate resolution, WMI/VDS/VIS parsing</p>
-            <div className="domain-card__tags">
-              <span>VIN</span><span>Plates</span><span>WMI</span>
+          {leftCards.map((card, i) => (
+            <div key={i} className="domain-card">
+              <span className="domain-card__icon">{ICONS[i]}</span>
+              <h3 className="domain-card__title">{card.title}</h3>
+              <p className="domain-card__desc">{card.desc}</p>
+              <div className="domain-card__tags">
+                {TAGS[i].map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
+              <div className="domain-connector domain-connector--right"></div>
             </div>
-            <div className="domain-connector domain-connector--right"></div>
-          </div>
-
-          <div className="domain-card">
-            <span className="domain-card__icon">⚙️</span>
-            <h3 className="domain-card__title">OEM &amp; IAM Catalogs</h3>
-            <p className="domain-card__desc">Parts cross-referencing, data mapping, catalog integration</p>
-            <div className="domain-card__tags">
-              <span>OEM</span><span>IAM</span><span>Cross-ref</span>
-            </div>
-            <div className="domain-connector domain-connector--right"></div>
-          </div>
+          ))}
         </div>
 
         {/* Exploded Car SVG */}
@@ -103,25 +107,17 @@ export default function DomainExpertise() {
 
         {/* Right cards */}
         <div className="domain-cards domain-cards--right">
-          <div className="domain-card">
-            <span className="domain-card__icon">🔗</span>
-            <h3 className="domain-card__title">TecAlliance Ecosystem</h3>
-            <p className="domain-card__desc">TecDoc, TecCom, standardization protocols</p>
-            <div className="domain-card__tags">
-              <span>TecDoc</span><span>TecCom</span><span>Standards</span>
+          {rightCards.map((card, i) => (
+            <div key={i} className="domain-card">
+              <span className="domain-card__icon">{ICONS[i + 2]}</span>
+              <h3 className="domain-card__title">{card.title}</h3>
+              <p className="domain-card__desc">{card.desc}</p>
+              <div className="domain-card__tags">
+                {TAGS[i + 2].map((tag) => <span key={tag}>{tag}</span>)}
+              </div>
+              <div className="domain-connector domain-connector--left"></div>
             </div>
-            <div className="domain-connector domain-connector--left"></div>
-          </div>
-
-          <div className="domain-card">
-            <span className="domain-card__icon">📊</span>
-            <h3 className="domain-card__title">Data Management</h3>
-            <p className="domain-card__desc">ETL pipelines, reverse engineering, QA processes</p>
-            <div className="domain-card__tags">
-              <span>ETL</span><span>Rev. Eng.</span><span>QA</span>
-            </div>
-            <div className="domain-connector domain-connector--left"></div>
-          </div>
+          ))}
         </div>
       </div>
     </section>

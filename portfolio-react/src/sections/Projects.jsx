@@ -1,4 +1,5 @@
 import './Projects.css';
+import { projects } from '../data/portfolio.js';
 
 export default function Projects() {
   return (
@@ -10,21 +11,20 @@ export default function Projects() {
       <h2 className="projects-title">Projects</h2>
 
       <div className="projects-grid">
-        <div className="projects-card">
-          <div className="projects-card__header">
-            <span className="projects-card__emoji">📋</span>
-            <h3 className="projects-card__name">Krate</h3>
+        {projects.map((project) => (
+          <div key={project.name} className="projects-card">
+            <div className="projects-card__header">
+              <span className="projects-card__emoji">📋</span>
+              <h3 className="projects-card__name">{project.name}</h3>
+            </div>
+            <p className="projects-card__desc">
+              {project.description}
+            </p>
+            <div className="projects-card__tech">
+              {project.tech.map((t) => <span key={t}>{t}</span>)}
+            </div>
           </div>
-          <p className="projects-card__desc">
-            Personal project manager with Kanban boards, task tracking, and git integration.
-          </p>
-          <div className="projects-card__tech">
-            <span>React</span>
-            <span>TypeScript</span>
-            <span>Express</span>
-            <span>Docker</span>
-          </div>
-        </div>
+        ))}
       </div>
     </section>
   );
