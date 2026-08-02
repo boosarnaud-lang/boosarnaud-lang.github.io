@@ -48,10 +48,10 @@ function getMarriageDuration() {
 
 // Fun facts
 const facts = [
-  { icon: '🍫', text: 'Ice chocolate in summer, hot chocolate in winter' },
-  { icon: '🦉', text: 'Night owl — best ideas after 22h' },
   { icon: '💍', text: `Married since Feb 2022 (${getMarriageDuration()})` },
   { icon: '🐕', text: `Golden Retriever (${getDogAge()})` },
+  { icon: '🍫', text: 'Ice chocolate in summer, hot chocolate in winter' },
+  { icon: '🦉', text: 'Night owl — best ideas after 22h' },
   { icon: '🎮', text: 'Gamer — after hours ritual' },
   { icon: '⚽', text: 'Football, cycling, padel' },
   { icon: '🎸', text: 'Music = rock mostly, listens to everything' },
