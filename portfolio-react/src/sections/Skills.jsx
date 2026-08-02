@@ -6,7 +6,6 @@ const tables = [
     name: 'languages',
     query: `SELECT name, level, years_exp
 FROM languages
-WHERE active = true
 ORDER BY years_exp DESC;`,
     columns: ['name', 'level', 'years_exp'],
     rows: [
@@ -20,7 +19,6 @@ ORDER BY years_exp DESC;`,
     name: 'frameworks_tools',
     query: `SELECT name, category, daily_use
 FROM frameworks_tools
-WHERE status = 'active'
 ORDER BY category;`,
     columns: ['name', 'category', 'daily_use'],
     rows: [
@@ -34,8 +32,7 @@ ORDER BY category;`,
   {
     name: 'domain_expertise',
     query: `SELECT domain, specialization, depth
-FROM domain_expertise
-WHERE industry = 'automotive';`,
+FROM domain_expertise;`,
     columns: ['domain', 'specialization', 'depth'],
     rows: [
       ['Automotive Data', 'vehicle ecosystems', 'expert'],
@@ -48,8 +45,7 @@ WHERE industry = 'automotive';`,
     name: 'other_skills',
     query: `SELECT skill, tools, experience
 FROM other_skills
-WHERE relevance > 0.7
-ORDER BY relevance DESC;`,
+ORDER BY experience DESC;`,
     columns: ['skill', 'tools', 'experience'],
     rows: [
       ['AI Agents', 'Kiro, Cursor, Claude', 'active'],
