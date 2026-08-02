@@ -1,17 +1,19 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import './Skills.css';
 
-const tables = [
+const DUOLINGO_USERNAME = 'ArnaudBoos';
+
+const staticTables = [
   {
     name: 'spoken_languages',
-    query: `SELECT language, level, source
+    query: `SELECT language, level, details
 FROM spoken_languages
 ORDER BY level DESC;`,
-    columns: ['language', 'level', 'source'],
+    columns: ['language', 'level', 'details'],
     rows: [
       ['French', 'native', '—'],
       ['English', 'fluent', '—'],
-      ['Japanese', 'learning', 'Duolingo'],
+      ['Japanese', 'learning', 'loading...'],
     ],
   },
   {
@@ -72,6 +74,52 @@ export default function Skills() {
   const [currentQuery, setCurrentQuery] = useState('');
   const [result, setResult] = useState(null);
   const [isRunning, setIsRunning] = useState(false);
+  const [tables, setTables] = useState(staticTables);
+
+  // Fetch Duolingo stats
+  useEffect(() => {
+    fetch(`https://www.duolingo.com/2017-06-30/users?username=${DUOLINGO_USERNAME}`)
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.users && data.users[0]) {
+          const user = data.users[0];
+          const streak = user.streak || 0;
+          const jaCourse = user.courses?.find((c) => c.learningLanguage === 'ja');
+          const xp = jaCourse ? jaCourse.xp : user.totalXp;
+          const details = `🔥 ${streak} day streak · ${xp.toLocaleString()} XP`;
+
+          setTables((prev) =>
+            prev.map((t) => {
+              if (t.name === 'spoken_languages') {
+                return {
+                  ...t,
+                  rows: t.rows.map((row) =>
+                    row[0] === 'Japanese' ? ['Japanese', 'learning', details] : row
+                  ),
+                };
+              }
+              return t;
+            })
+          );
+        }
+      })
+      .catch(() => {
+        // Fallback if API fails
+        setTables((prev) =>
+          prev.map((t) => {
+            if (t.name === 'spoken_languages') {
+              return {
+                ...t,
+                rows: t.rows.map((row) =>
+                  row[0] === 'Japanese' ? ['Japanese', 'learning', 'Duolingo'] : row
+                ),
+              };
+            }
+            return t;
+          })
+        );
+      });
+  }, []);
 
   const runQuery = (query) => {
     setCurrentQuery(query);
