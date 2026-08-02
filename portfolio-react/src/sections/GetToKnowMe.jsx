@@ -107,7 +107,7 @@ export default function GetToKnowMe() {
           <div className="about__card about__card--live">
             <div className="about__card-header">
               <span className="about__live-dot"></span>
-              Live — {localTime} (Schiltigheim)
+              Live — {localTime} (Schwindratzheim)
             </div>
             <div className="about__current-activity">
               {currentActivity ? (

@@ -50,7 +50,7 @@ export function generateCV() {
   y += 7;
   doc.setFontSize(8.5);
   doc.setTextColor(...COLORS.textDim);
-  doc.text(`${getYearsExp()}+ years at Catdata · Schiltigheim, France · boosarnaud@gmail.com · linkedin.com/in/arnaud-boos-28a3a67b`, margin, y);
+  doc.text(`${getYearsExp()}+ years at Catdata · Schwindratzheim, France · boosarnaud@gmail.com · linkedin.com/in/arnaud-boos-28a3a67b`, margin, y);
 
   // Accent bar under header
   y = 45;
