@@ -1,9 +1,10 @@
 import { useState, useEffect } from 'react';
 import './GetToKnowMe.css';
 
-// Daily schedule
-const schedule = [
-  { start: 7, end: 8, label: 'Wake up', icon: '☀️' },
+// Daily schedules
+const weekdaySchedule = [
+  { start: 0, end: 7.5, label: 'Sleeping', icon: '😴' },
+  { start: 7.5, end: 8, label: 'Wake up', icon: '☀️' },
   { start: 8, end: 9, label: 'Dog walk', icon: '🐕' },
   { start: 9, end: 12, label: 'Work — coding & data', icon: '💻' },
   { start: 12, end: 12.5, label: 'Lunch', icon: '🍽️' },
@@ -11,6 +12,18 @@ const schedule = [
   { start: 18, end: 22, label: 'Family, sport, reading', icon: '🏡' },
   { start: 22, end: 24, label: 'Geeking', icon: '🎮' },
 ];
+
+const weekendSchedule = [
+  { start: 0, end: 7.5, label: 'Sleeping', icon: '😴' },
+  { start: 7.5, end: 8, label: 'Wake up', icon: '☀️' },
+  { start: 8, end: 9, label: 'Dog walk', icon: '🐕' },
+  { start: 9, end: 24, label: 'Charging batteries', icon: '🔋' },
+];
+
+function getSchedule() {
+  const day = new Date().getDay();
+  return (day === 0 || day === 6) ? weekendSchedule : weekdaySchedule;
+}
 
 // Fun facts
 const facts = [
@@ -48,6 +61,7 @@ function getLocalTime() {
 export default function GetToKnowMe() {
   const [currentHour, setCurrentHour] = useState(getCurrentHour());
   const [localTime, setLocalTime] = useState(getLocalTime());
+  const schedule = getSchedule();
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -59,6 +73,7 @@ export default function GetToKnowMe() {
 
   // Find current activity
   const currentActivity = schedule.find((s) => currentHour >= s.start && currentHour < s.end);
+  const isWeekend = new Date().getDay() === 0 || new Date().getDay() === 6;
 
   return (
     <section id="about" className="about">
@@ -89,11 +104,11 @@ export default function GetToKnowMe() {
 
           {/* Day timeline */}
           <div className="about__card about__card--timeline">
-            <div className="about__card-header">📅 A typical day</div>
+            <div className="about__card-header">📅 {isWeekend ? 'Weekend mode' : 'A typical weekday'}</div>
             <div className="about__timeline">
               {schedule.map((s) => {
-                const width = ((s.end - s.start) / 17) * 100; // 7h to 24h = 17h total
-                const left = ((s.start - 7) / 17) * 100;
+                const width = ((s.end - s.start) / 24) * 100;
+                const left = (s.start / 24) * 100;
                 const isCurrent = currentHour >= s.start && currentHour < s.end;
                 return (
                   <div
@@ -109,11 +124,11 @@ export default function GetToKnowMe() {
               {/* Current time indicator */}
               <div
                 className="about__timeline-now"
-                style={{ left: `${((currentHour - 7) / 17) * 100}%` }}
+                style={{ left: `${(currentHour / 24) * 100}%` }}
               />
             </div>
             <div className="about__timeline-labels">
-              <span>7h</span><span>12h</span><span>18h</span><span>00h</span>
+              <span>0h</span><span>6h</span><span>12h</span><span>18h</span><span>24h</span>
             </div>
           </div>
 
