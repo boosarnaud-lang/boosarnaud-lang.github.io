@@ -5,7 +5,7 @@ const ICONS = ['🔍', '⚙️', '🔗', '📊'];
 const TAGS = [
   ['VIN', 'Plates', 'WMI'],
   ['OEM', 'IAM', 'Cross-ref'],
-  ['TecDoc', 'TecCom', 'Standards'],
+  ['TecDoc', 'TecRMI', 'Standards'],
   ['ETL', 'Rev. Eng.', 'QA'],
 ];
 
