@@ -56,7 +56,7 @@ const facts = [
   { icon: '⚽', text: 'Football, cycling, padel' },
   { icon: '🎸', text: 'Music = rock mostly, listens to everything' },
   { icon: '📚', text: 'Dune (book 4), WoT ✓, HP ✓, Witcher ✓' },
-  { icon: '🖥️', text: 'Kiro / Cursor / VS Code on Linux (WSL)' },
+  { icon: '🖥️', text: 'Kiro on Linux (WSL)' },
 ];
 
 // Ask me about

@@ -123,10 +123,18 @@ export default function Skills() {
     }, 600);
   };
 
-  // Auto-run first query on mount
+  // Auto-run first query on mount (use 'languages' which has no async dependency)
   useEffect(() => {
-    if (tables.length > 0 && !result) {
-      runQuery(tables[0].query);
+    if (tables.length > 1 && !result) {
+      runQuery(tables[1].query);
+    }
+  }, []);
+
+  // Sync result when tables update (e.g., Duolingo data arrives)
+  useEffect(() => {
+    if (result && !result.error && currentQuery) {
+      const table = tables.find((t) => currentQuery.includes(`FROM ${t.name}`));
+      if (table) setResult(table);
     }
   }, [tables]);
 

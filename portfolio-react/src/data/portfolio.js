@@ -24,7 +24,7 @@ export const experience = [
       'Data pipeline architecture, ETL processes, and quality assurance',
       'Project Management & Technical Consulting',
       'Reverse Engineering of proprietary data formats and protocols',
-      'AI Agents development (Kiro, Cursor, LLM tooling)',
+      'AI Agents development (Kiro, LLM tooling)',
     ],
     skills: ['Full Stack Dev', 'Automotive Data', 'VIN/Plate', 'OEM & IAM', 'TecAlliance', 'Project Management', 'Reverse Engineering', 'AI Agents'],
   },
@@ -48,7 +48,7 @@ export const skills = {
   languages: { items: ['TypeScript', 'Go', 'PHP', 'SQL'], columns: ['name', 'level', 'years_exp'], rows: [['PHP', 'expert', '14'], ['SQL', 'advanced', '14'], ['TypeScript', 'expert', '8'], ['Go', 'advanced', '4']] },
   frameworks_tools: { items: ['React', 'Node.js', 'Docker', 'Git', 'REST APIs'], columns: ['name', 'category', 'daily_use'], rows: [['React', 'framework', 'true'], ['Node.js', 'runtime', 'true'], ['Docker', 'devops', 'true'], ['Git', 'vcs', 'true'], ['REST APIs', 'architecture', 'true']] },
   domain_expertise: { items: ['Automotive Data', 'VIN/Plate Identification', 'TecAlliance', 'OEM & IAM Catalogs'], columns: ['domain', 'specialization', 'depth'], rows: [['Automotive Data', 'vehicle ecosystems', 'expert'], ['VIN/Plate ID', 'decoding & resolution', 'expert'], ['TecAlliance', 'TecDoc, TecCom', 'expert'], ['OEM & IAM Catalogs', 'cross-referencing', 'expert']] },
-  other_skills: { items: ['AI Agents', 'Data Management', 'Reverse Engineering', 'Project Management'], columns: ['skill', 'tools', 'experience'], rows: [['AI Agents', 'Kiro, Cursor, Claude', 'active'], ['Data Management', 'ETL, pipelines', '14 years'], ['Reverse Engineering', 'protocols, formats', '10 years'], ['Project Management', 'consulting', '8 years']] },
+  other_skills: { items: ['AI Agents', 'Data Management', 'Reverse Engineering', 'Project Management'], columns: ['skill', 'tools', 'experience'], rows: [['AI Agents', 'Kiro, Claude', 'active'], ['Data Management', 'ETL, pipelines', '14 years'], ['Reverse Engineering', 'protocols, formats', '10 years'], ['Project Management', 'consulting', '8 years']] },
 };
 
 export const domainExpertise = [
