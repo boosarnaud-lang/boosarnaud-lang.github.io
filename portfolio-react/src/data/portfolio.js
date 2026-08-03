@@ -155,7 +155,7 @@ export function getSkills(lang = 'en') {
           ['Node.js', 'runtime', 'true'],
           ['Git', 'vcs', 'true'],
           ['Symfony', 'framework', 'false'],
-          ['DBeaver', 'tool', 'false'],
+          ['DBeaver', 'tool', 'true'],
         ],
       },
       domain_expertise: {
@@ -194,9 +194,10 @@ export function getSkills(lang = 'en') {
         columns: ['nom', 'niveau', 'années_exp'],
         rows: [
           ['PHP', 'expert', '14'],
-          ['SQL', 'avancé', '14'],
-          ['TypeScript', 'expert', '8'],
-          ['Go', 'avancé', '4'],
+          ['SQL', 'expert', '14'],
+          ['TypeScript', 'avancé', '2'],
+          ['Go', 'newbie', '1'],
+          ['Python', 'avancé', '2'],
         ],
       },
       frameworks_tools: {
@@ -208,6 +209,8 @@ export function getSkills(lang = 'en') {
           ['React', 'framework', 'oui'],
           ['Node.js', 'runtime', 'oui'],
           ['Git', 'vcs', 'oui'],
+          ['Symfony', 'framework', 'non'],
+          ['DBeaver', 'tool', 'oui'],
         ],
       },
       domain_expertise: {
