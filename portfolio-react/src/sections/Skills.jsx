@@ -118,10 +118,11 @@ export default function Skills() {
     }, 600);
   };
 
-  // Auto-run first query when tables change (mount + language switch)
+  // Auto-run first query when language changes (mount + language switch)
   useEffect(() => {
-    if (tables.length > 1) {
-      runQuery(tables[1].query);
+    const freshTables = buildStaticTables(lang);
+    if (freshTables.length > 1) {
+      runQuery(freshTables[1].query);
     }
   }, [lang]);
 
