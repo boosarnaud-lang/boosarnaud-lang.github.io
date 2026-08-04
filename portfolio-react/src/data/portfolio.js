@@ -131,7 +131,6 @@ export function getSkills(lang = 'en') {
         rows: [
           ['French', 'native', 'mother tongue'],
           ['English', 'fluent', 'professional working'],
-          ['German', 'learning', 'basic conversation'],
         ],
       },
       languages: {
@@ -186,7 +185,6 @@ export function getSkills(lang = 'en') {
         rows: [
           ['Français', 'natif', 'langue maternelle'],
           ['Anglais', 'courant', 'professionnel'],
-          ['Allemand', 'en apprentissage', 'conversation basique'],
         ],
       },
       languages: {

@@ -1,14 +1,21 @@
 import { jsPDF } from 'jspdf';
 import { personal, experience, skills, domainExpertise, projects, education } from '../data/portfolio.js';
+import profilePhoto from '../assets/profile.jpg';
+
+const TITLE = 'Full Stack Engineer · AI Agent Builder · Data Manager';
 
 // Dark green modern theme colors
 const COLORS = {
-  bg: [18, 35, 28],          // #12231c
-  headerBg: [12, 25, 20],    // #0c1914
-  accent: [34, 197, 94],     // #22c55e
-  text: [230, 240, 235],     // #e6f0eb
-  textDim: [150, 180, 165],  // #96b4a5
-  divider: [40, 70, 55],     // #284637
+  sidebarBg: [18, 35, 28],       // dark green sidebar
+  mainBg: [255, 255, 255],       // white main area
+  accent: [34, 197, 94],         // green accent
+  sidebarText: [230, 240, 235],  // light text on sidebar
+  sidebarDim: [150, 180, 165],   // dimmed text on sidebar
+  mainText: [30, 30, 30],        // dark text on white
+  mainDim: [100, 100, 100],      // dimmed text on white
+  sidebarDivider: [40, 70, 55],  // divider on sidebar
+  mainDivider: [200, 200, 200],  // divider on main
+  avatarBg: [34, 197, 94],       // avatar circle
 };
 
 function getYearsExp() {
@@ -20,194 +27,259 @@ export function generateCV() {
   const doc = new jsPDF({ unit: 'mm', format: 'a4' });
   const W = 210;
   const H = 297;
-  const margin = 15;
-  const contentW = W - margin * 2;
-  let y = 0;
+  const SIDEBAR_W = 70;
+  const MAIN_X = SIDEBAR_W;
+  const MAIN_W = W - SIDEBAR_W;
+  const sideMargin = 8;
+  const mainMargin = 10;
 
-  // Background
-  doc.setFillColor(...COLORS.bg);
-  doc.rect(0, 0, W, H, 'F');
+  // === BACKGROUNDS ===
+  // Sidebar
+  doc.setFillColor(...COLORS.sidebarBg);
+  doc.rect(0, 0, SIDEBAR_W, H, 'F');
+  // Main area
+  doc.setFillColor(...COLORS.mainBg);
+  doc.rect(SIDEBAR_W, 0, MAIN_W, H, 'F');
 
-  // Header bar
-  doc.setFillColor(...COLORS.headerBg);
-  doc.rect(0, 0, W, 45, 'F');
+  // ===========================
+  // LEFT SIDEBAR
+  // ===========================
+  let sideY = 20;
+
+  // Avatar with profile photo (circular appearance)
+  const avatarR = 18;
+  const avatarCx = SIDEBAR_W / 2;
+  const avatarCy = sideY + avatarR;
+
+  // Place the square image
+  const imgSize = avatarR * 2;
+  doc.addImage(profilePhoto, 'JPEG', avatarCx - avatarR, avatarCy - avatarR, imgSize, imgSize);
+
+  // Draw a thick ring in sidebar color to mask corners into a circle
+  doc.setDrawColor(...COLORS.sidebarBg);
+  doc.setLineWidth(8);
+  doc.rect(avatarCx - avatarR - 4, avatarCy - avatarR - 4, imgSize + 8, imgSize + 8, 'S');
+
+  sideY = avatarCy + avatarR + 12;
+
+  // Sidebar section helper
+  function sidebarSection(title) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...COLORS.accent);
+    doc.text(title.toUpperCase(), sideMargin, sideY);
+    sideY += 2.5;
+    doc.setDrawColor(...COLORS.sidebarDivider);
+    doc.setLineWidth(0.3);
+    doc.line(sideMargin, sideY, SIDEBAR_W - sideMargin, sideY);
+    sideY += 5;
+  }
+
+  function sidebarItem(label, detail) {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(8);
+    doc.setTextColor(...COLORS.sidebarText);
+    doc.text(label, sideMargin, sideY);
+    sideY += 3.8;
+    if (detail) {
+      doc.setFont('helvetica', 'normal');
+      doc.setFontSize(7.5);
+      doc.setTextColor(...COLORS.sidebarDim);
+      const lines = doc.splitTextToSize(detail, SIDEBAR_W - sideMargin * 2);
+      doc.text(lines, sideMargin, sideY);
+      sideY += lines.length * 3.5;
+    }
+    sideY += 1.5;
+  }
+
+  // --- COMPÉTENCES (Skills) ---
+  sidebarSection('Skills');
+
+  // Languages
+  skills.languages.rows.forEach((row) => {
+    sidebarItem(row[0], row[1]);
+  });
+
+  sideY += 3;
+
+  // Frameworks & Tools
+  sidebarSection('Tools & Frameworks');
+
+  skills.frameworks_tools.rows.forEach((row) => {
+    sidebarItem(row[0], row[1]);
+  });
+
+  sideY += 3;
+
+  // --- LANGUES (Languages) ---
+  sidebarSection('Languages');
+
+  skills.spoken_languages.rows.forEach((row) => {
+    sidebarItem(row[0], row[1]);
+  });
+
+  sideY += 3;
+
+  // --- CENTRES D'INTÉRÊT (Domain Expertise) ---
+  sidebarSection('Domain Expertise');
+
+  domainExpertise.forEach((d) => {
+    sidebarItem(d.title, d.desc);
+  });
+
+  // ===========================
+  // RIGHT MAIN AREA
+  // ===========================
+  let mainY = 18;
+  const mainTextX = MAIN_X + mainMargin;
+  const mainContentW = MAIN_W - mainMargin * 2;
 
   // Name
-  y = 18;
   doc.setFont('helvetica', 'bold');
   doc.setFontSize(22);
-  doc.setTextColor(...COLORS.text);
-  doc.text(personal.name, margin, y);
+  doc.setTextColor(...COLORS.mainText);
+  doc.text(personal.name.split(' ')[0], mainTextX, mainY);
+  mainY += 8;
+  doc.text(personal.name.split(' ')[1] || '', mainTextX, mainY);
 
-  // Subtitle
-  y += 8;
+  // Title
+  mainY += 7;
   doc.setFont('helvetica', 'normal');
-  doc.setFontSize(11);
-  doc.setTextColor(...COLORS.accent);
-  doc.text(personal.title, margin, y);
+  doc.setFontSize(10);
+  doc.setTextColor(...COLORS.mainDim);
+  doc.text(TITLE, mainTextX, mainY);
 
-  // Meta
-  y += 7;
-  doc.setFontSize(8.5);
-  doc.setTextColor(...COLORS.textDim);
-  doc.text(`${getYearsExp()}+ years at ${personal.company} · ${personal.location} · ${personal.email} · ${personal.linkedin.replace('https://www.', '')}`, margin, y);
+  // Contact info
+  mainY += 8;
+  doc.setFontSize(7.5);
+  doc.setTextColor(...COLORS.mainDim);
+  doc.text(`✉  ${personal.email}`, mainTextX, mainY);
+  mainY += 4;
+  doc.text(`⌘  ${personal.linkedin.replace('https://www.', '')}`, mainTextX, mainY);
+  mainY += 4;
+  doc.text(`☁  ${personal.location}`, mainTextX, mainY);
 
-  // Accent bar under header
-  y = 45;
-  doc.setFillColor(...COLORS.accent);
-  doc.rect(0, y, W, 1, 'F');
+  mainY += 10;
 
-  // Section helper
-  function sectionTitle(title) {
-    y += 10;
+  // Main section helper
+  function mainSection(title) {
     doc.setFont('helvetica', 'bold');
     doc.setFontSize(10);
     doc.setTextColor(...COLORS.accent);
-    doc.text(title.toUpperCase(), margin, y);
-    y += 2;
-    doc.setDrawColor(...COLORS.divider);
+    doc.text(title.toUpperCase(), mainTextX, mainY);
+    mainY += 2.5;
+    doc.setDrawColor(...COLORS.mainDivider);
     doc.setLineWidth(0.3);
-    doc.line(margin, y, margin + contentW, y);
-    y += 5;
+    doc.line(mainTextX, mainY, mainTextX + mainContentW, mainY);
+    mainY += 6;
   }
 
-  function jobEntry(title, company, period, details) {
+  // --- PROFIL ---
+  mainSection('Profile');
+
+  doc.setFont('helvetica', 'normal');
+  doc.setFontSize(8.5);
+  doc.setTextColor(...COLORS.mainText);
+  const profileText = `Full Stack Engineer with ${getYearsExp()}+ years at ${personal.company} (${personal.companyGroup} group). Specialized in automotive data management, vehicle identification systems, and building data pipelines. Passionate about AI agents and developer tooling.`;
+  const profileLines = doc.splitTextToSize(profileText, mainContentW);
+  doc.text(profileLines, mainTextX, mainY);
+  mainY += profileLines.length * 4 + 4;
+
+  // --- EXPÉRIENCE ---
+  mainSection('Experience');
+
+  function mainJobEntry(title, company, period, details) {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(9.5);
-    doc.setTextColor(...COLORS.text);
-    doc.text(`${title}`, margin, y);
+    doc.setFontSize(9);
+    doc.setTextColor(...COLORS.mainText);
+    doc.text(title, mainTextX, mainY);
+    mainY += 4;
     doc.setFont('helvetica', 'normal');
-    doc.setTextColor(...COLORS.accent);
-    doc.text(` — ${company}`, margin + doc.getTextWidth(`${title} `), y);
-    y += 4.5;
     doc.setFontSize(8);
-    doc.setTextColor(...COLORS.textDim);
-    doc.text(period, margin, y);
-    y += 5;
-    if (details) {
-      doc.setTextColor(...COLORS.text);
-      doc.setFontSize(8.5);
+    doc.setTextColor(...COLORS.accent);
+    doc.text(company, mainTextX, mainY);
+    doc.setTextColor(...COLORS.mainDim);
+    doc.text(` | ${period}`, mainTextX + doc.getTextWidth(company + ' '), mainY);
+    mainY += 5;
+
+    if (details && details.length > 0) {
+      doc.setFontSize(8);
+      doc.setTextColor(...COLORS.mainText);
       details.forEach((d) => {
-        doc.text(`•  ${d}`, margin + 3, y);
-        y += 4.2;
+        const bulletLines = doc.splitTextToSize(`•  ${d}`, mainContentW - 5);
+        doc.text(bulletLines, mainTextX + 3, mainY);
+        mainY += bulletLines.length * 3.8;
       });
     }
-    y += 2;
+    mainY += 3;
   }
 
-  // === EXPERIENCE ===
-  sectionTitle('Experience');
-
   const exp0 = experience[0];
-  jobEntry(exp0.title, `${exp0.company} since ${personal.companyGroupSince}`, `July 2012 — Present (${getYearsExp()}+ years)`, exp0.details);
+  mainJobEntry(
+    exp0.title,
+    `${exp0.company}`,
+    `Jul 2012 — Present (${getYearsExp()}+ years)`,
+    exp0.details,
+  );
 
   const exp1 = experience[1];
-  jobEntry(exp1.title, exp1.company, 'June 2017 — April 2022 (5 years)', exp1.details);
+  mainJobEntry(
+    exp1.title,
+    exp1.company,
+    'Jun 2017 — Apr 2022 (5 years)',
+    exp1.details,
+  );
 
   const exp2 = experience[2];
-  jobEntry(exp2.title, exp2.company, 'April — June 2012', exp2.details);
+  mainJobEntry(
+    exp2.title,
+    exp2.company,
+    'Apr — Jun 2012',
+    exp2.details,
+  );
 
-  // === SKILLS ===
-  sectionTitle('Skills');
+  // --- FORMATION (Education) ---
+  mainSection('Education');
 
-  const skillGroups = [
-    ['Languages', skills.languages.items.join(' · ')],
-    ['Frameworks & Tools', skills.frameworks_tools.items.join(' · ')],
-    ['Domain', skills.domain_expertise.items.join(' · ')],
-    ['Other', skills.other_skills.items.join(' · ')],
-  ];
-
-  const colW = contentW / 2;
-  const startY = y;
-
-  skillGroups.forEach((group, i) => {
-    const col = i % 2;
-    const row = Math.floor(i / 2);
-    const xPos = margin + col * colW;
-    const yPos = startY + row * 14;
-
+  education.forEach((edu) => {
     doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.5);
+    doc.setFontSize(9);
+    doc.setTextColor(...COLORS.mainText);
+    doc.text(edu.degree, mainTextX, mainY);
+    mainY += 4;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...COLORS.mainDim);
+    doc.text(`${edu.school} · ${edu.period}`, mainTextX, mainY);
+    mainY += 7;
+  });
+
+  // --- PROJECTS ---
+  mainSection('Projects');
+
+  projects.forEach((proj) => {
+    doc.setFont('helvetica', 'bold');
+    doc.setFontSize(9);
+    doc.setTextColor(...COLORS.mainText);
+    doc.text(proj.name, mainTextX, mainY);
+    mainY += 4;
+    doc.setFont('helvetica', 'normal');
+    doc.setFontSize(8);
+    doc.setTextColor(...COLORS.mainDim);
+    const descLines = doc.splitTextToSize(proj.description, mainContentW);
+    doc.text(descLines, mainTextX, mainY);
+    mainY += descLines.length * 3.8;
     doc.setTextColor(...COLORS.accent);
-    doc.text(group[0], xPos, yPos);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(...COLORS.text);
-    doc.text(group[1], xPos, yPos + 4.5);
+    doc.setFontSize(7.5);
+    doc.text(proj.tech.join(' · '), mainTextX, mainY);
+    mainY += 6;
   });
 
-  y = startY + 28;
-
-  // === DOMAIN EXPERTISE ===
-  sectionTitle('Domain Expertise — Automotive Data');
-
-  const domains = domainExpertise.map((d) => [d.title, d.desc]);
-
-  const domStartY = y;
-  domains.forEach((d, i) => {
-    const col = i % 2;
-    const row = Math.floor(i / 2);
-    const xPos = margin + col * colW;
-    const yPos = domStartY + row * 12;
-
-    doc.setFont('helvetica', 'bold');
-    doc.setFontSize(8.5);
-    doc.setTextColor(...COLORS.text);
-    doc.text(d[0], xPos, yPos);
-
-    doc.setFont('helvetica', 'normal');
-    doc.setFontSize(8);
-    doc.setTextColor(...COLORS.textDim);
-    doc.text(d[1], xPos, yPos + 4.2);
-  });
-
-  y = domStartY + 24;
-
-  // === PROJECTS ===
-  sectionTitle('Projects');
-
-  const proj = projects[0];
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9.5);
-  doc.setTextColor(...COLORS.text);
-  doc.text(proj.name, margin, y);
-  doc.setFont('helvetica', 'normal');
-  doc.setTextColor(...COLORS.textDim);
-  doc.text(` — ${proj.description.split(' with ')[0].replace('Personal project manager', 'Personal Project Manager')}`, margin + doc.getTextWidth(`${proj.name} `), y);
-  y += 4.5;
-  doc.setFontSize(8.5);
-  doc.setTextColor(...COLORS.text);
-  doc.text(`•  Kanban boards, task tracking, git integration (${proj.tech.join(', ')})`, margin + 3, y);
-  y += 6;
-
-  // === EDUCATION ===
-  sectionTitle('Education');
-
-  const edu0 = education[0];
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(...COLORS.text);
-  doc.text(edu0.degree, margin, y);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(...COLORS.textDim);
-  doc.text(`${edu0.school} · ${edu0.period}`, margin, y + 4.2);
-  y += 12;
-
-  const edu1 = education[1];
-  doc.setFont('helvetica', 'bold');
-  doc.setFontSize(9);
-  doc.setTextColor(...COLORS.text);
-  doc.text(edu1.degree, margin, y);
-  doc.setFont('helvetica', 'normal');
-  doc.setFontSize(8);
-  doc.setTextColor(...COLORS.textDim);
-  doc.text(`${edu1.school} · ${edu1.period}`, margin, y + 4.2);
-
-  // Footer accent line
+  // Footer accent bar
   doc.setFillColor(...COLORS.accent);
-  doc.rect(0, H - 3, W, 3, 'F');
+  doc.rect(SIDEBAR_W, H - 2, MAIN_W, 2, 'F');
+  doc.setFillColor(...COLORS.sidebarBg);
+  doc.rect(0, H - 2, SIDEBAR_W, 2, 'F');
 
   // Save
   doc.save(`${personal.name.replace(' ', '_')}_CV.pdf`);

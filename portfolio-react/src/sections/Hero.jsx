@@ -3,6 +3,7 @@ import { useLang } from '../context/LanguageContext';
 import './Hero.css';
 import { generateCV } from '../utils/generateCV';
 import { personal } from '../data/portfolio.js';
+import profilePhoto from '../assets/profile.jpg';
 
 function getAge() {
   const today = new Date();
@@ -60,9 +61,9 @@ export default function Hero() {
       <div className="hero__shape hero__shape--5" />
 
       <div className="hero__content">
-        {/* Photo placeholder */}
+        {/* Profile photo */}
         <div className="hero__avatar">
-          <span className="hero__avatar-initials">AB</span>
+          <img src={profilePhoto} alt={personal.name} className="hero__avatar-img" />
         </div>
 
         <h1 className="hero__name">{personal.name}</h1>
