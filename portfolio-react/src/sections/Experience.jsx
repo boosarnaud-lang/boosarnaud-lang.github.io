@@ -13,7 +13,7 @@ export default function Experience() {
   const experience = getExperience(lang);
   
   return (
-    <section id="experience" className="experience">
+    <section id="experience" className="experience reveal">
       <div className="experience__blob experience__blob--1" />
       <div className="experience__blob experience__blob--2" />
       <div className="experience__blob experience__blob--3" />

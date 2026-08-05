@@ -397,3 +397,28 @@
     padding: 0.85rem;
   }
 }
+
+/* ===== THEME VARIANTS ===== */
+
+/* Light mode — slightly lighter */
+[data-theme="light"] .domain-section {
+  background: #101820;
+}
+
+/* Dark mode — deeper, richer */
+[data-theme="dark"] .domain-section {
+  background: #050810;
+}
+
+[data-theme="dark"] .domain-card {
+  background: rgba(5, 8, 16, 0.9);
+  border-color: rgba(245, 158, 11, 0.3);
+}
+
+[data-theme="dark"] .domain-glow--amber {
+  background: radial-gradient(circle, rgba(245, 158, 11, 0.2), transparent 70%);
+}
+
+[data-theme="dark"] .domain-glow--blue {
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 70%);
+}

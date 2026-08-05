@@ -17,7 +17,7 @@ export default function DomainExpertise() {
   const rightCards = domainExpertise.slice(2, 4);
 
   return (
-    <section id="domain" className="domain-section">
+    <section id="domain" className="domain-section reveal">
       <div className="domain-glow domain-glow--amber"></div>
       <div className="domain-glow domain-glow--blue"></div>
 

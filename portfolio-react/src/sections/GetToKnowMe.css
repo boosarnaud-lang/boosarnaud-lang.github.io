@@ -242,3 +242,28 @@
     font-size: 1rem;
   }
 }
+
+/* ===== THEME VARIANTS ===== */
+
+/* Light mode — slightly lighter */
+[data-theme="light"] .about {
+  background: linear-gradient(135deg, #2a1418, #3d1c22, #2a1418);
+}
+
+/* Dark mode — deeper, richer */
+[data-theme="dark"] .about {
+  background: linear-gradient(135deg, #0d0507, #1a0a0e, #0d0507);
+}
+
+[data-theme="dark"] .about__card {
+  background: rgba(255, 255, 255, 0.02);
+  border-color: rgba(220, 50, 80, 0.3);
+}
+
+[data-theme="dark"] .about__card--live {
+  background: rgba(220, 50, 80, 0.04);
+}
+
+[data-theme="dark"] .about__timeline {
+  background: rgba(255, 255, 255, 0.02);
+}

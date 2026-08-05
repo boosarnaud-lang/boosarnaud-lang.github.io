@@ -96,7 +96,7 @@ export default function GetToKnowMe() {
   const isWeekend = new Date().getDay() === 0 || new Date().getDay() === 6;
 
   return (
-    <section id="about" className="about">
+    <section id="about" className="about reveal">
       <div className="about__content">
         <h2 className="about__title">{t.about.title}</h2>
 

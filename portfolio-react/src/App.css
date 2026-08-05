@@ -27,6 +27,7 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: background 0.5s ease;
 }
 
 .wip-banner {
@@ -42,6 +43,7 @@ section {
   font-size: 0.75rem;
   font-weight: 600;
   letter-spacing: 0.02em;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 .footer {
@@ -50,6 +52,7 @@ section {
   background: #0a0e14;
   color: #888;
   font-size: 0.8rem;
+  transition: background 0.5s ease, color 0.5s ease;
 }
 
 /* Responsive utilities */
@@ -83,4 +86,29 @@ button:focus-visible {
   outline: 2px solid #2563eb;
   outline-offset: 2px;
   border-radius: 4px;
+}
+
+/* ===== SCROLL REVEAL ANIMATIONS ===== */
+
+.reveal {
+  transition: background 0.5s ease, color 0.5s ease;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    transition: none;
+  }
+}
+
+/* ===== DARK MODE GLOBAL ===== */
+
+[data-theme="dark"] .footer {
+  background: #060810;
+  color: #6b7280;
+}
+
+[data-theme="dark"] .wip-banner {
+  background: #92400e;
+  color: #fef3c7;
 }

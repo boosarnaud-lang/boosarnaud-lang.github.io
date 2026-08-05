@@ -170,3 +170,44 @@
     padding: 1rem 1.25rem;
   }
 }
+
+/* ===== DARK MODE ===== */
+
+[data-theme="dark"] .education-section {
+  background: linear-gradient(135deg, #071a12, #0a1f16, #091c10);
+}
+
+[data-theme="dark"] .edu-leaf {
+  opacity: 0.08;
+}
+
+[data-theme="dark"] .edu-branch--1,
+[data-theme="dark"] .edu-branch--2 {
+  opacity: 0.06;
+}
+
+[data-theme="dark"] .education-title {
+  color: #a7f3d0;
+}
+
+[data-theme="dark"] .education-card {
+  background: rgba(16, 30, 24, 0.8);
+  border-color: rgba(16, 185, 129, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .education-card:hover {
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .education-card__degree {
+  color: #d1fae5;
+}
+
+[data-theme="dark"] .education-card__school {
+  color: #6ee7b7;
+}
+
+[data-theme="dark"] .education-card__year {
+  color: #6b7280;
+}

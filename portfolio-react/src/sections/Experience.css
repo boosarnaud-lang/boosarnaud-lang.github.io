@@ -227,3 +227,58 @@
     font-size: 0.8rem;
   }
 }
+
+/* ===== DARK MODE ===== */
+
+[data-theme="dark"] .experience {
+  background: #1a1510;
+}
+
+[data-theme="dark"] .experience__blob {
+  background: #d97706;
+  opacity: 0.05;
+}
+
+[data-theme="dark"] .experience__title {
+  color: #fef3c7;
+}
+
+[data-theme="dark"] .experience__role {
+  color: #fde68a;
+}
+
+[data-theme="dark"] .experience__company {
+  color: #a8956e;
+}
+
+[data-theme="dark"] .experience__duration {
+  color: #78716c;
+}
+
+[data-theme="dark"] .experience__achievements li {
+  color: #d6d3d1;
+}
+
+[data-theme="dark"] .experience__achievements li::before {
+  color: #f59e0b;
+}
+
+[data-theme="dark"] .experience__item--highlight {
+  background: rgba(180, 83, 9, 0.08);
+  border-color: rgba(180, 83, 9, 0.2);
+}
+
+[data-theme="dark"] .experience__dot {
+  border-color: #1a1510;
+}
+
+[data-theme="dark"] .experience__skill {
+  background: rgba(217, 119, 6, 0.15);
+  border-color: rgba(217, 119, 6, 0.3);
+  color: #fbbf24;
+}
+
+[data-theme="dark"] .experience__timeline::before {
+  background: #d97706;
+  opacity: 0.2;
+}

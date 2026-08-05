@@ -150,3 +150,52 @@
     padding: 1.5rem;
   }
 }
+
+/* ===== DARK MODE ===== */
+
+[data-theme="dark"] .projects-section {
+  background: linear-gradient(135deg, #1a0f1e, #1a1525, #0f1724);
+}
+
+[data-theme="dark"] .projects-blob--1 {
+  background: #9d174d;
+  opacity: 0.25;
+}
+
+[data-theme="dark"] .projects-blob--2 {
+  background: #5b21b6;
+  opacity: 0.25;
+}
+
+[data-theme="dark"] .projects-blob--3 {
+  background: #1e40af;
+  opacity: 0.25;
+}
+
+[data-theme="dark"] .projects-title {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .projects-card {
+  background: rgba(30, 27, 40, 0.85);
+  border-color: rgba(139, 92, 246, 0.2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+[data-theme="dark"] .projects-card:hover {
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+[data-theme="dark"] .projects-card__name {
+  color: #f1f5f9;
+}
+
+[data-theme="dark"] .projects-card__desc {
+  color: #94a3b8;
+}
+
+[data-theme="dark"] .projects-card__tech span {
+  background: rgba(109, 40, 217, 0.2);
+  color: #c4b5fd;
+  border-color: rgba(139, 92, 246, 0.3);
+}

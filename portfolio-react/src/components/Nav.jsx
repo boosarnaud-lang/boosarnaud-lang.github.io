@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react'
 import { useLang } from '../context/LanguageContext'
+import { useTheme } from '../context/ThemeContext'
 import './Nav.css'
 
 const sections = ['hero', 'experience', 'skills', 'domain', 'about', 'projects', 'education']
 
 function Nav() {
   const { t, lang, toggleLang } = useLang();
+  const { isDark, toggleTheme } = useTheme();
   const [activeSection, setActiveSection] = useState('hero')
   const [menuOpen, setMenuOpen] = useState(false)
 
@@ -69,6 +71,14 @@ function Nav() {
           aria-label="Toggle language"
         >
           {lang === 'en' ? 'FR' : 'EN'}
+        </button>
+
+        <button
+          className="nav-theme"
+          onClick={toggleTheme}
+          aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
+        >
+          {isDark ? '☀️' : '🌙'}
         </button>
 
         <button

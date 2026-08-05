@@ -7,6 +7,7 @@ import GetToKnowMe from './sections/GetToKnowMe'
 import Projects from './sections/Projects'
 import Education from './sections/Education'
 import { LanguageProvider, useLang } from './context/LanguageContext'
+import { ThemeProvider } from './context/ThemeContext'
 import './App.css'
 
 function AppContent() {
@@ -32,9 +33,11 @@ function AppContent() {
 
 function App() {
   return (
-    <LanguageProvider>
-      <AppContent />
-    </LanguageProvider>
+    <ThemeProvider>
+      <LanguageProvider>
+        <AppContent />
+      </LanguageProvider>
+    </ThemeProvider>
   )
 }
 

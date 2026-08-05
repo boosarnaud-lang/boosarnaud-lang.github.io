@@ -389,3 +389,40 @@
     padding: 0.3rem 0.5rem;
   }
 }
+
+/* ===== THEME VARIANTS ===== */
+
+/* Light mode — softer dark for contrast with truly light sections */
+[data-theme="light"] .skills {
+  background: #2a2a3c;
+}
+
+[data-theme="light"] .skills__ide-bar {
+  background: #222236;
+}
+
+/* Dark mode — deeper, more saturated */
+[data-theme="dark"] .skills {
+  background: #11111b;
+}
+
+[data-theme="dark"] .skills__ide-bar {
+  background: #0b0b14;
+}
+
+[data-theme="dark"] .skills__workspace {
+  background: #1e1e2e;
+  border-color: #45475a;
+}
+
+[data-theme="dark"] .skills__explorer {
+  background: #0b0b14;
+}
+
+[data-theme="dark"] .skills__textarea {
+  background: #11111b;
+}
+
+[data-theme="dark"] .skills__results {
+  background: #0b0b14;
+}

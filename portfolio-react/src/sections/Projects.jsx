@@ -7,7 +7,7 @@ export default function Projects() {
   const projects = getProjects(lang);
   
   return (
-    <section id="projects" className="projects-section">
+    <section id="projects" className="projects-section reveal">
       <div className="projects-blob projects-blob--1"></div>
       <div className="projects-blob projects-blob--2"></div>
       <div className="projects-blob projects-blob--3"></div>

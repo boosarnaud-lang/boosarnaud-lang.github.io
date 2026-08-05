@@ -47,6 +47,21 @@
   color: #fff;
 }
 
+.nav-theme {
+  font-size: 1.1rem;
+  padding: 4px 8px;
+  border-radius: 4px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+  line-height: 1;
+}
+
+.nav-theme:hover {
+  transform: rotate(20deg) scale(1.2);
+}
+
 .nav-links {
   display: flex;
   list-style: none;
@@ -212,4 +227,46 @@
   .nav-links {
     width: 80%;
   }
+}
+
+/* ===== DARK MODE NAV ===== */
+
+[data-theme="dark"] .nav[data-section="hero"] { background: rgba(15, 18, 25, 0.92); color: #e2e8f0; }
+[data-theme="dark"] .nav[data-section="hero"] .nav-logo { color: #60a5fa; }
+[data-theme="dark"] .nav[data-section="hero"] .nav-burger__line { background: #60a5fa; }
+[data-theme="dark"] .nav[data-section="hero"] .nav-link { color: #e2e8f0; }
+[data-theme="dark"] .nav[data-section="hero"] .nav-link:hover { background: rgba(96, 165, 250, 0.15); }
+[data-theme="dark"] .nav[data-section="hero"] .nav-link.active { background: #2563eb; color: #fff; }
+[data-theme="dark"] .nav[data-section="hero"] .nav-lang:hover { background: #2563eb; color: #fff; }
+
+[data-theme="dark"] .nav[data-section="experience"] { background: rgba(26, 21, 16, 0.92); color: #fef3c7; }
+[data-theme="dark"] .nav[data-section="experience"] .nav-logo { color: #f59e0b; }
+[data-theme="dark"] .nav[data-section="experience"] .nav-burger__line { background: #f59e0b; }
+[data-theme="dark"] .nav[data-section="experience"] .nav-link { color: #fef3c7; }
+[data-theme="dark"] .nav[data-section="experience"] .nav-link:hover { background: rgba(245, 158, 11, 0.15); }
+[data-theme="dark"] .nav[data-section="experience"] .nav-link.active { background: #d97706; color: #fff; }
+[data-theme="dark"] .nav[data-section="experience"] .nav-lang:hover { background: #d97706; color: #fff; }
+
+[data-theme="dark"] .nav[data-section="projects"] { background: rgba(26, 15, 30, 0.92); color: #e2e8f0; }
+[data-theme="dark"] .nav[data-section="projects"] .nav-logo { color: #c4b5fd; }
+[data-theme="dark"] .nav[data-section="projects"] .nav-burger__line { background: #c4b5fd; }
+[data-theme="dark"] .nav[data-section="projects"] .nav-link { color: #e2e8f0; }
+[data-theme="dark"] .nav[data-section="projects"] .nav-link:hover { background: rgba(196, 181, 253, 0.15); }
+[data-theme="dark"] .nav[data-section="projects"] .nav-link.active { background: #8b5cf6; color: #fff; }
+[data-theme="dark"] .nav[data-section="projects"] .nav-lang:hover { background: #8b5cf6; color: #fff; }
+
+[data-theme="dark"] .nav[data-section="education"] { background: rgba(7, 26, 18, 0.92); color: #d1fae5; }
+[data-theme="dark"] .nav[data-section="education"] .nav-logo { color: #34d399; }
+[data-theme="dark"] .nav[data-section="education"] .nav-burger__line { background: #34d399; }
+[data-theme="dark"] .nav[data-section="education"] .nav-link { color: #d1fae5; }
+[data-theme="dark"] .nav[data-section="education"] .nav-link:hover { background: rgba(52, 211, 153, 0.15); }
+[data-theme="dark"] .nav[data-section="education"] .nav-link.active { background: #10b981; color: #fff; }
+[data-theme="dark"] .nav[data-section="education"] .nav-lang:hover { background: #10b981; color: #fff; }
+
+/* Dark mode mobile menu backgrounds */
+@media (max-width: 768px) {
+  [data-theme="dark"] .nav[data-section="hero"] .nav-links { background: rgba(15, 18, 25, 0.97); }
+  [data-theme="dark"] .nav[data-section="experience"] .nav-links { background: rgba(26, 21, 16, 0.97); }
+  [data-theme="dark"] .nav[data-section="projects"] .nav-links { background: rgba(26, 15, 30, 0.97); }
+  [data-theme="dark"] .nav[data-section="education"] .nav-links { background: rgba(7, 26, 18, 0.97); }
 }

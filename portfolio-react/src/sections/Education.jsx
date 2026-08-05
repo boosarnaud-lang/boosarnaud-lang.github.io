@@ -7,7 +7,7 @@ export default function Education() {
   const education = getEducation(lang);
   
   return (
-    <section id="education" className="education-section">
+    <section id="education" className="education-section reveal">
       {/* Decorative botanical shapes */}
       <div className="edu-leaf edu-leaf--1"></div>
       <div className="edu-leaf edu-leaf--2"></div>

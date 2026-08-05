@@ -151,7 +151,7 @@ export default function Skills() {
   };
 
   return (
-    <section id="skills" className="skills">
+    <section id="skills" className="skills reveal">
       {/* Scrolling SQL background */}
       <div className="skills__code-bg" aria-hidden="true">
         <div className="skills__code-scroll">
